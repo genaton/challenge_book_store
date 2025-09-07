@@ -1,14 +1,12 @@
-import logo from "./img/logo_challenge_book_store.webp";
 import "./App.css";
+import Logo from './components/Logo'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <div className="logo">
-          <img src={logo} alt="logo challenge book store"></img>
-          <p>Challenge Book Store</p>
-        </div>
+    <div className= "App">
+      <header className= "App-header">
+        <Logo></Logo>
+        
       </header>
     </div>
   );
