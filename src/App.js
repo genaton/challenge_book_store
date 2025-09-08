@@ -1,15 +1,12 @@
-import "./App.css";
-import Logo from './components/Logo'
+import './App.css';
+import Header from './components/Header'
 
 function App() {
   return (
-    <div className= "App">
-      <header className= "App-header">
-        <Logo></Logo>
-        
-      </header>
+    <div className='App'>
+      <Header />
     </div>
   );
 }
 
-export default App;
+export default App
