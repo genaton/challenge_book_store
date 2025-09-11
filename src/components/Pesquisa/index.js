@@ -8,16 +8,17 @@ import Input from "../Input";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const PesquisaConteiner = styled.section`
-   display: flex;
-   align-items: center;
-   width: auto;
-   padding: 0;
-   margin: 0;
-   
-   /* justify-content: center; */
+  display: flex;
+  align-items: center;
+
+  width: auto;
+  padding: 0;
+  margin: 0;
+
+  /* justify-content: center; */
   /* padding: 85px 0; */
   /* background-color: #f5f5f5; */
- `;
+`;
 
 const SearchWrapper = styled.div`
   display: flex;
@@ -26,9 +27,9 @@ const SearchWrapper = styled.div`
   position: relative;
 `;
 
-
 function Pesquisa() {
   const [showInput, setShowInput] = useState(false);
+  const [searchTerm, setSearchTerm] = useState([]);
   const inputRef = useRef(null);
 
   const handleToggle = () => {
@@ -60,7 +61,22 @@ function Pesquisa() {
           type="text"
           placeholder="Digite o nome do livro"
           expanded={showInput}
+          onChange={(evento) => setSearchTerm(evento.target.value)}
+          //   onBlur={()=> setShowInput(false)}
+          //   onBlur={evento => {
+          //     const textoDigitado = evento.target.value;
+          //     const resultadoPesquisa = bancoDeDados.filter( dado => dado.nome.includes(textoDigitado) )
+          //     setSearchTerm(resultadoPesquisa)
+
+          //   }}
         />
+
+        {/* {searchTerm.map((dado) => (
+          <div>
+            <p>{dado.nome}</p>
+            <img src={dado.src} />
+          </div>
+        ))} */}
       </SearchWrapper>
     </PesquisaConteiner>
   );

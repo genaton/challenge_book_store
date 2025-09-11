@@ -17,7 +17,8 @@ const OpcaoHeaderContainer = styled.li`
   cursor: pointer;
 `;
 
-const textoOpcoes = ["CATEGORIAS", "FAVORITOS", "MINHA ESTANTE"];
+// const textoOpcoes = ["CATEGORIAS", "FAVORITOS", "MINHA ESTANTE"];
+const textoOpcoes = ["MINHA ESTANTE"];
 
 function OpcoesHeader() {
   return (

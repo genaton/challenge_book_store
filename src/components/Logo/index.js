@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 const LogoContainer = styled.div`
   display: flex;
+  align-items: center;
 `;
 
 const LogoImg = styled.img`
@@ -14,9 +15,9 @@ const LogoImg = styled.img`
 `;
 
 const BrandContainer = styled.p`
-  display: flex;
-  font-size: 30px;
+  display: flex; 
   align-items: center;
+  font-size: 30px;
   font-family: "PMingLiu-Extb";
   /* color: #05023a;s */
   color: #837cfb;
@@ -26,7 +27,7 @@ function Logo() {
   return (
     <LogoContainer>
       <LogoImg src={logo} alt="logo challenge book store"></LogoImg>
-      <BrandContainer className="brand">BOOKMARK</BrandContainer>
+      <BrandContainer>BOOKMARK</BrandContainer>
     </LogoContainer>
   );
 }

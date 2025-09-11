@@ -4,6 +4,7 @@ import { Form } from "react-bootstrap";
 
 
 const Input = styled(Form.Control)`
+  
   width: ${({ expanded }) => (expanded ? "300px" : "0")};
   transition: width 0.4s ease, opacity 0.4s ease;
   overflow: hidden;
