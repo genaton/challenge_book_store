@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import Titulo from "../Titulo";
+import Pesquisa from "../Pesquisa";
 
-const UltimosLancamentosContainer = styled.section`
+const BemVindosContainer = styled.section`
   background-color: #837cfb;
   padding-bottom: 20px;
   display: flex;
@@ -15,17 +16,18 @@ const NovosLivrosContainer = styled.div`
   justify-content: center;
   cursor: pointer;
 `;
-function UltimosLancamentos() {
+function BemVindos() {
   return (
-    <UltimosLancamentosContainer>
+    <BemVindosContainer>
             <Titulo>BEM-VINDOS À BOOKMARK</Titulo>
             <NovosLivrosContainer>
+              <Pesquisa/>
                 {/* { livros.map( livro => (
                     <img src={livro.src}/>
                 ) ) } */}
             </NovosLivrosContainer>
-        </UltimosLancamentosContainer>
+        </BemVindosContainer>
 
   )
 }
-export default UltimosLancamentos;
+export default BemVindos;

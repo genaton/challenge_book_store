@@ -2,9 +2,10 @@ import styled from "styled-components";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-const FooterContainer = styled.footer.attrs(()=>({
-    className: 'text-center py-3'
-}))`
+// const FooterContainer = styled.footer.attrs(()=>({
+//     className: 'd-flex justify-content-center align-itens-center bg-black text-white text-center py-3 '
+// }))
+const FooterContainer = styled.footer`
   display: flex;
   justify-content: center;
   align-items: center;

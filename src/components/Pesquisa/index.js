@@ -1,84 +1,86 @@
-// src/componentes/Pesquisa.js
-
-import { useState, useRef, useEffect } from "react";
+import Input from "../Input/index.js";
 import styled from "styled-components";
-import { FaSearch } from "react-icons/fa";
-import Input from "../Input";
+import { useState } from "react";
+import { getLivros } from "../../services/livros.js";
+import { useEffect } from "react";
 
-import "bootstrap/dist/css/bootstrap.min.css";
-
-const PesquisaConteiner = styled.section`
-  display: flex;
-  align-items: center;
-
-  width: auto;
-  padding: 0;
-  margin: 0;
-
-  /* justify-content: center; */
-  /* padding: 85px 0; */
-  /* background-color: #f5f5f5; */
+const PesquisaContainer = styled.section`
+  background-image: linear-gradient(90deg, #002f52 35%, #326589 165%);
+  color: #fff;
+  text-align: center;
+  padding: 85px 0;
+  height: 470px;
+  width: 100%;
 `;
 
-const SearchWrapper = styled.div`
+const Titulo = styled.h2`
+  color: #fff;
+  font-size: 36px;
+  text-align: center;
+  width: 100%;
+`;
+
+const Subtitulo = styled.h3`
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 40px;
+`;
+
+const Resultado = styled.div`
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 10px;
-  position: relative;
+  margin-bottom: 20px;
+  cursor: pointer;
+
+  p {
+    width: 200px;
+  }
+
+  img {
+    width: 100px;
+  }
+
+  &:hover {
+    border: 1px solid white;
+  }
 `;
 
 function Pesquisa() {
-  const [showInput, setShowInput] = useState(false);
-  const [searchTerm, setSearchTerm] = useState([]);
-  const inputRef = useRef(null);
+  const [livrosPesquisados, setLivrosPesquisados] = useState([]);
+  const [livros, setLivros] = useState([]);
 
-  const handleToggle = () => {
-    setShowInput((prev) => !prev);
-  };
-
-  // Fecha o campo se clicar fora
   useEffect(() => {
-    function handleClickOutside(event) {
-      if (inputRef.current && !inputRef.current.contains(event.target)) {
-        setShowInput(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    fetchLivros();
   }, []);
 
+  async function fetchLivros() {
+    const livrosDaAPI = await getLivros();
+    setLivros(livrosDaAPI);
+  }
+
   return (
-    <PesquisaConteiner>
-      <SearchWrapper ref={inputRef}>
-        <FaSearch
-          size={24}
-          style={{ cursor: "pointer", color: "#05023a" }}
-          onClick={handleToggle}
-        />
-        <Input
-          type="text"
-          placeholder="Digite o nome do livro"
-          expanded={showInput}
-          onChange={(evento) => setSearchTerm(evento.target.value)}
-          //   onBlur={()=> setShowInput(false)}
-          //   onBlur={evento => {
-          //     const textoDigitado = evento.target.value;
-          //     const resultadoPesquisa = bancoDeDados.filter( dado => dado.nome.includes(textoDigitado) )
-          //     setSearchTerm(resultadoPesquisa)
-
-          //   }}
-        />
-
-        {/* {searchTerm.map((dado) => (
-          <div>
-            <p>{dado.nome}</p>
-            <img src={dado.src} />
-          </div>
-        ))} */}
-      </SearchWrapper>
-    </PesquisaConteiner>
+    <PesquisaContainer>
+      <Titulo>Já sabe por onde começar?</Titulo>
+      <Subtitulo>Encontre seu livro em nossa estante.</Subtitulo>
+      <Input
+        placeholder="Escreva sua próxima leitura"
+        onBlur={(evento) => {
+          const textoDigitado = evento.target.value;
+          const resultadoPesquisa = livros.filter((livro) =>
+            livro.titulo.includes(textoDigitado.toLowerCase())
+          );
+          console.log('teste: ' + resultadoPesquisa)
+          setLivrosPesquisados(resultadoPesquisa);
+        }}
+      />
+      {livrosPesquisados.map((livro) => (
+        <Resultado key={livro.id}>
+          <img src={livro.imagem} alt={`Capa de ${livro.titulo}`} />
+          <p>{livro.titulo}</p>
+        </Resultado>
+      ))}
+    </PesquisaContainer>
   );
 }
 

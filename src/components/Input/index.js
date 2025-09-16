@@ -1,26 +1,20 @@
-import styled from "styled-components";
-import { Form } from "react-bootstrap";
+import styled from "styled-components"
 
+const Input = styled.input`
+    order: 1px solid #FFF;
+    background: transparent;
+    border: 1px solid #FFF;
+    padding: 20px 140px;
+    border-radius: 50px;
+    width: 200px;
+    color: #FFF;
+    font-size: 16px;
+    margin-bottom: 30px;
 
+    &::placeholder {
+        color: #FFF;
+        font-size: 16px;
+    }
+`
 
-const Input = styled(Form.Control)`
-  
-  width: ${({ expanded }) => (expanded ? "300px" : "0")};
-  transition: width 0.4s ease, opacity 0.4s ease;
-  overflow: hidden;
-  padding: ${({ expanded }) => (expanded ? "0.375rem 0.75rem" : "0")};
-  border: ${({ expanded }) => (expanded ? "1px solid #05023a" : "none")};
-  opacity: ${({ expanded }) => (expanded ? 1 : 0)};
-  background-color: ${({ expanded }) => (expanded ? "#fff" : "transparent")};
-  border-radius: 20px;
-  min-width: 0 !important;
-    
-  &::placeholder {
-    color: #837cfb;
-    font-size: 20px;
-    
-  }
-  
-`;
-
-export default Input;
+export default Input
