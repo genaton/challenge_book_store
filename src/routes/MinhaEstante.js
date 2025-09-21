@@ -15,7 +15,7 @@ const AppContainer = styled.div`
 function MinhaEstante() {
   const [livros, setLivros] = useState([]);
   const [livrosFiltrados, setLivrosFiltrados] = useState([]);
-  
+
   useEffect(() => {
     async function fetchLivros() {
       const livrosDaAPI = await getLivros();
@@ -24,24 +24,23 @@ function MinhaEstante() {
     }
     fetchLivros();
   }, []);
-   const handleSearch = (texto) => {
-    const resultado = livros.filter((livro) =>
-      livro.titulo.toLowerCase().includes(texto.toLowerCase())
-    );
+  const handleSearch = (texto) => {
+    const textoFormatado = String(texto || "").toLowerCase();
+
+    const resultado = livros.filter((livro) => {
+      const tituloFormatado = String(livro?.titulo || "").toLowerCase();
+      return tituloFormatado.includes(textoFormatado);
+    });
+
     setLivrosFiltrados(resultado);
   };
 
-
-
-
-
   return (
-     <>
+    <>
       <Header onSearch={handleSearch} />
       <ResultadosLivros livros={livrosFiltrados} />
       <Footer />
     </>
-
   );
 }
 

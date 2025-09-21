@@ -7,9 +7,7 @@ import { useEffect } from "react";
 const PesquisaContainer = styled.section`
   color: #ffffffff;
   text-align: center;
-  padding-left:10px ;
-
-  
+  padding-left: 10px;
 `;
 
 const Titulo = styled.h2`
@@ -25,38 +23,30 @@ const Subtitulo = styled.h3`
   margin-bottom: 40px;
 `;
 
-
-
-function Pesquisa({onSearch}) {
-   const [livros, setLivros] = useState([]);
+function Pesquisa({ onSearch }) {
+  const [livros, setLivros] = useState([]);
 
   useEffect(() => {
     async function fetchLivros() {
-    const livrosDaAPI = await getLivros();
-    setLivros(livrosDaAPI);
-  }
-  
+      const livrosDaAPI = await getLivros();
+      setLivros(livrosDaAPI);
+    }
+
     fetchLivros();
   }, []);
 
-    function handleBlur(evento) {
-    const textoDigitado = evento.target.value;
-    const resultadoPesquisa = livros.filter((livro) =>
-      livro.titulo.toLowerCase().includes(textoDigitado.toLowerCase())
-    );
-    onSearch(resultadoPesquisa);
-  }
- 
+ function handleBlur(evento) {
+  const textoDigitado = evento.target.value;
+  onSearch(textoDigitado); // 👈 envia o texto, não o resultado
+}
+
 
   return (
     <PesquisaContainer>
       {/* <Titulo>Já sabe por onde começar?</Titulo> */}
       {/* <Subtitulo>Encontre seu livro em nossa estante.</Subtitulo> */}
-      <Input
-        placeholder="Escreva sua próxima leitura"
-        onBlur={handleBlur}
-        />
-            </PesquisaContainer>
+      <Input placeholder="Escreva sua próxima leitura" onBlur={handleBlur} />
+    </PesquisaContainer>
   );
 }
 
