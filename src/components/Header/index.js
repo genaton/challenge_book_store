@@ -2,14 +2,11 @@ import "./style.css";
 import Logo from "../Logo";
 import OpcoesHeader from "../OpcoesHeader";
 import IconesHeader from "../IconesHeader";
-// import Pesquisa from "../Pesquisa";
 import styled from "styled-components";
-// import "bootstrap/dist/css/bootstrap.min.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import Pesquisa from "../Pesquisa";
 
-// const HeaderContainer = styled.header.attrs(() => ({
-//   className: "d-flex justify-content-center align-items-center pt-3 bg-white",
-// }))
+
 
 const HeaderContainer = styled.header`
   background-color: #fff;
@@ -18,15 +15,18 @@ const HeaderContainer = styled.header`
   align-items: center;
 `;
 
-function Header() {
+function Header({onSearch}) {
+  const location = useLocation();
+  const mostrarPesquisa = location.pathname ==="/minha-estante"
   return (
     <HeaderContainer>
       <Link to="/">
         <Logo />
       </Link>
       <OpcoesHeader />
-      {/* <IconesHeader /> */}
-      {/* <Pesquisa/> */}
+      {mostrarPesquisa && onSearch && <Pesquisa onSearch={onSearch}/>}    
+     
+     
     </HeaderContainer>
   );
 }

@@ -1,6 +1,6 @@
 import "./style.css";
 import styled from "styled-components";
-// import 'bootstrap/dist/css/bootstrap.min.css';
+import Pesquisa from "../Pesquisa";
 import { Link } from "react-router-dom";
 
 
@@ -30,10 +30,10 @@ function OpcoesHeader() {
     <OpcoesHeaderContainer>
       {textoOpcoes.map((texto, i) => (
       <OpcaoHeaderContainer>
-         <Link to={`/${texto.toLowerCase()}`}><p>{texto}</p></Link> 
+         <Link to={`/${texto.toLowerCase().replace(/\s+/g, "-")}`}><p>{texto}</p></Link> 
         </OpcaoHeaderContainer>
       ))}
-    </OpcoesHeaderContainer>
+          </OpcoesHeaderContainer>
   );
 }
 

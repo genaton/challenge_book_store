@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import Titulo from "../Titulo";
-import Pesquisa from "../Pesquisa";
+import Card from "../Card";
+
+
 
 const BemVindosContainer = styled.section`
   background-color: #837cfb;
@@ -17,14 +19,13 @@ const NovosLivrosContainer = styled.div`
   cursor: pointer;
 `;
 function BemVindos() {
+ 
+  
   return (
     <BemVindosContainer>
             <Titulo>BEM-VINDOS À BOOKMARK</Titulo>
             <NovosLivrosContainer>
-              <Pesquisa/>
-                {/* { livros.map( livro => (
-                    <img src={livro.src}/>
-                ) ) } */}
+              <Card/>              
             </NovosLivrosContainer>
         </BemVindosContainer>
 

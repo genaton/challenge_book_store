@@ -39,7 +39,7 @@ root.render(
     <BrowserRouter>
       <Header />
       <Routes>
-        <Route path="/minha estante" element={<MinhaEstante/>} />
+        <Route path="/minha-estante" element={<MinhaEstante/>} />
         <Route path="/" element={<Home />} />
       </Routes>
        <Footer/>      
