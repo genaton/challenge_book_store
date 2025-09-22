@@ -12,33 +12,33 @@ const AppContainer = styled.div`
   height: 100vh;
 `;
 
-function MinhaEstante() {
-  const [livros, setLivros] = useState([]);
-  const [livrosFiltrados, setLivrosFiltrados] = useState([]);
+function MinhaEstante({ livros }) {
+  // const [livros, setLivros] = useState([]);
+  // const [livrosFiltrados, setLivrosFiltrados] = useState([]);
 
-  useEffect(() => {
-    async function fetchLivros() {
-      const livrosDaAPI = await getLivros();
-      setLivros(livrosDaAPI);
-      setLivrosFiltrados(livrosDaAPI); // exibe todos inicialmente
-    }
-    fetchLivros();
-  }, []);
-  const handleSearch = (texto) => {
-    const textoFormatado = String(texto || "").toLowerCase();
+  // useEffect(() => {
+  //   async function fetchLivros() {
+  //     const livrosDaAPI = await getLivros();
+  //     setLivros(livrosDaAPI);
+  //     setLivrosFiltrados(livrosDaAPI); // exibe todos inicialmente
+  //   }
+  //   fetchLivros();
+  // }, []);
+  // const handleSearch = (texto) => {
+  //   const textoFormatado = String(texto || "").toLowerCase();
 
-    const resultado = livros.filter((livro) => {
-      const tituloFormatado = String(livro?.titulo || "").toLowerCase();
-      return tituloFormatado.includes(textoFormatado);
-    });
+  //   const resultado = livros.filter((livro) => {
+  //     const tituloFormatado = String(livro?.titulo || "").toLowerCase();
+  //     return tituloFormatado.includes(textoFormatado);
+  //   });
 
-    setLivrosFiltrados(resultado);
-  };
+  //   setLivrosFiltrados(resultado);
+  // };
 
   return (
     <>
-      <Header onSearch={handleSearch} />
-      <ResultadosLivros livros={livrosFiltrados} />
+      {/* <Header onSearch={handleSearch} /> */}
+      <ResultadosLivros livros={livros} />
       <Footer />
     </>
   );
