@@ -9,10 +9,10 @@ const FooterContainer = styled.footer`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #333;
+  background-color: #837cfb;
   color: #fff;
   padding: 20px 0;
-  position: fixed;
+  /* position: fixed; */
   bottom: 0;
   left: 0;
   width: 100%;

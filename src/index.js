@@ -47,12 +47,32 @@ function App() {
   const handleSearch = (textoDigitado) => {
     const textoFormatado = String(textoDigitado || "").toLowerCase();
     const resultado = livros.filter((livro) =>
-      String(livro?.titulo || "").toLowerCase().includes(textoFormatado)
+      String(livro?.titulo || "")
+        .toLowerCase()
+        .includes(textoFormatado)
     );
     setLivrosFiltrados(resultado);
   };
 
   const mostrarPesquisa = location.pathname === "/minha-estante";
+
+  const handleUpdate = (id, novoTitulo) => {
+    setLivros((prev) =>
+      prev.map((livro) =>
+        livro.id === id ? { ...livro, titulo: novoTitulo } : livro
+      )
+    );
+    setLivrosFiltrados((prev) =>
+      prev.map((livro) =>
+        livro.id === id ? { ...livro, titulo: novoTitulo } : livro
+      )
+    );
+  };
+
+  const handleDelete = (id) => {
+    setLivros((prev) => prev.filter((livro) => livro.id !== id));
+    setLivrosFiltrados((prev) => prev.filter((livro) => livro.id !== id));
+  };
 
   return (
     <>
@@ -60,7 +80,16 @@ function App() {
       <Header onSearch={mostrarPesquisa ? handleSearch : undefined} />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/minha-estante" element={<MinhaEstante livros={livrosFiltrados} />} />
+        <Route
+          path="/minha-estante"
+          element={
+            <MinhaEstante
+              livros={livrosFiltrados}
+              onUpdate={handleUpdate}
+              onDelete={handleDelete}
+            />
+          }
+        />
       </Routes>
       <Footer />
     </>

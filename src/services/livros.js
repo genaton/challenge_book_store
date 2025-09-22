@@ -7,7 +7,21 @@ async function getLivros(){
 
     return response.data;
 }
+async function deleteLivro(id) {
+  const response = await livrosAPI.delete(`/${id}`);
+  return response.status === 200;
+}
+
+async function updateLivro(id, novoTitulo) {
+  const response = await livrosAPI.patch(`/${id}`, { titulo: novoTitulo });
+  return response.status === 200;
+}
+
+
+
 
 export {
-    getLivros
+    getLivros,
+    deleteLivro,
+    updateLivro
 }

@@ -1,6 +1,7 @@
 import { FaSearch } from "react-icons/fa";
 import { useState } from "react";
 import styled from "styled-components"
+import Hint from "../Hint";
 
 const Container = styled.div`
      display: flex;
@@ -43,6 +44,7 @@ function Input({ onBlur }) {
 
   return (
     <Container>
+      <Hint texto="Clique sobre a lupa para pesquisar"/>
       <IconButton onClick={() => setExpanded(!expanded)}>
         <FaSearch />
       </IconButton>
