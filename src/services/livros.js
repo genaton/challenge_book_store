@@ -16,6 +16,11 @@ async function updateLivro(id, novoTitulo) {
   const response = await livrosAPI.patch(`/${id}`, { titulo: novoTitulo });
   return response.status === 200;
 }
+async function postLivro(titulo) {
+  return await livrosAPI.post("/", { titulo }); 
+
+
+}
 
 
 
@@ -23,5 +28,6 @@ async function updateLivro(id, novoTitulo) {
 export {
     getLivros,
     deleteLivro,
-    updateLivro
+    updateLivro,
+    postLivro
 }

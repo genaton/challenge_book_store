@@ -5,6 +5,7 @@ import Pesquisa from "../components/Pesquisa";
 import Header from "../components/Header";
 import ResultadosLivros from "../components/ResultadoLivros";
 
+
 import styled from "styled-components";
 
 const AppContainer = styled.div`
@@ -12,7 +13,16 @@ const AppContainer = styled.div`
   height: 100vh;
 `;
 
-function MinhaEstante({ livros, onUpdate, onDelete }) {
+function MinhaEstante({ onUpdate, onDelete }) {
+  const [livros, setLivros] = useState([]);
+  useEffect(() => {
+    async function fetchLivros() {
+      const livrosDaAPI = await getLivros();
+      setLivros(livrosDaAPI);
+    }
+    fetchLivros();
+  }, [])
+
   return (
     <>
       <ResultadosLivros livros={livros} 

@@ -31,6 +31,7 @@ const InputField = styled.input`
   font-size: 16px;
   margin-left: ${(props) => (props.expanded ? "10px" : "0")};
   margin-bottom: 30px;
+  text-align: center;
 
   &::placeholder {
     color: #05023a;
@@ -57,7 +58,7 @@ function Input({ onBlur }) {
           onBlur && onBlur(e);
           setExpanded(false);
         }}
-        placeholder="Escreva sua próxima leitura"
+        placeholder="Encontre um livro"
       />
     </Container>
   );

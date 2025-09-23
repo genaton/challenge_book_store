@@ -6,8 +6,10 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
-import { getLivros } from "./services/livros";
+import { getLivros, postLivro } from "./services/livros";
 import reportWebVitals from "./reportWebVitals";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -74,10 +76,39 @@ function App() {
     setLivrosFiltrados((prev) => prev.filter((livro) => livro.id !== id));
   };
 
+  const mostrarAdicionar = location.pathname === "/minha-estante";
+
+  const handleAddLivro = async (titulo) => {
+    if (typeof titulo !== "string") {
+      console.warn("handleAddLivro recebeu título corrompido:", titulo);
+      return;
+    }
+
+    const novoLivro = await postLivro(titulo);
+    if (novoLivro) {
+      const livrosAtualizados = await getLivros();
+      setLivros(livrosAtualizados);
+
+      // Reaplica o filtro atual
+      const textoAtual = String(
+        document.querySelector("input")?.value || ""
+      ).toLowerCase();
+      const resultado = livrosAtualizados.filter((livro) =>
+        String(livro?.titulo || "")
+          .toLowerCase()
+          .includes(textoAtual)
+      );
+      setLivrosFiltrados(resultado);
+    }
+  };
+
   return (
     <>
       <GlobalStyle />
-      <Header onSearch={mostrarPesquisa ? handleSearch : undefined} />
+      <Header
+        onSearch={mostrarPesquisa ? handleSearch : undefined}
+        onAddLivro={mostrarAdicionar ? handleAddLivro : undefined}
+      />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route
@@ -92,6 +123,7 @@ function App() {
         />
       </Routes>
       <Footer />
+      <ToastContainer position="top-right" autoClose={3000} />
     </>
   );
 }
