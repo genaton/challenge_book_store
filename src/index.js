@@ -10,6 +10,8 @@ import { getLivros, postLivro } from "./services/livros";
 import reportWebVitals from "./reportWebVitals";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -30,6 +32,8 @@ const GlobalStyle = createGlobalStyle`
   li {
     list-style: none;
   }
+
+  
 `;
 
 function App() {
@@ -136,5 +140,6 @@ root.render(
     </BrowserRouter>
   </React.StrictMode>
 );
+
 
 reportWebVitals();
