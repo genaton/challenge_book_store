@@ -15,12 +15,13 @@ const LogoImg = styled.img`
 `;
 
 const BrandContainer = styled.span` /* ✅ Mudei para span */
-  font-size: 30px;
+  font-size: 2em;
   font-family: "PMingLiu-Extb";
   color: #837cfb;
   line-height: 1; /* ✅ Remove espaçamento extra */
   display: flex;
   align-items: center;
+  padding-left: 0.5em;
 `;
 
 function Logo() {
