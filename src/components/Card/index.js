@@ -12,8 +12,8 @@ const CardContainer = styled.div`
   flex-direction: column;
   margin: 0 auto;
 
-  }
-`;
+ 
+`
 
 const ImagemContainer = styled.div`
   width: 100%;
