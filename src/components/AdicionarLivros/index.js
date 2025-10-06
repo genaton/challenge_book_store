@@ -58,9 +58,9 @@ function AdicionarLivro({ onAdd }) {
         toast.success("📚 Livro adicionado com sucesso!");
       }
     } catch (error) {
-      console.error("Erro ao adicionar livro:", error);
+      console.error("Erro ao adicionar livro:", error.response.data.erro);
       toast.error(
-        "❌ Erro ao adicionar livro. Verifique o título e tente novamente."
+        "❌ Erro ao adicionar livro. " + error.response.data.erro
       );
     }
   };

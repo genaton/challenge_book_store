@@ -1,7 +1,6 @@
 import "./style.css";
 import Logo from "../Logo";
 import OpcoesHeader from "../OpcoesHeader";
-import IconesHeader from "../IconesHeader";
 import styled from "styled-components";
 import { Link, useLocation } from "react-router-dom";
 import Pesquisa from "../Pesquisa";
@@ -29,10 +28,7 @@ function Header({onSearch, onAddLivro}) {
       </Link>
       <OpcoesHeader />
       {mostrarPesquisa && onSearch && <Pesquisa onSearch={onSearch}/>}
-      {mostrarAdicionar && onAddLivro && <AdicionarLivro onAdd={onAddLivro} />}
-    
-     
-     
+      {mostrarAdicionar && onAddLivro && <AdicionarLivro onAdd={onAddLivro} />}          
     </HeaderContainer>
   );
 }

@@ -1,6 +1,5 @@
 import "./style.css";
 import styled from "styled-components";
-import Pesquisa from "../Pesquisa";
 import { Link } from "react-router-dom";
 
 
