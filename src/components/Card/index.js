@@ -8,7 +8,7 @@ const CardContainer = styled.div`
   transition: all 0.3s ease;
   width: 100%;
   max-width: auto;
-  min-height: 380px;
+  height: 580px;
   flex-direction: column;
   margin: 0 auto;
 
@@ -43,8 +43,8 @@ const ConteudoCard = styled.div`
 `;
 
 const TituloChamada = styled.h5`
-  color: #333;
-  font-size: 1.3rem;
+  color: #837cfb;
+  font-size: 1rem;
   margin-bottom: 12px;
   font-weight: bold;
   line-height: 1.3;
@@ -52,7 +52,7 @@ const TituloChamada = styled.h5`
 
 const DescricaoChamada = styled.p`
   color: #666;
-  font-size: 0.95rem;
+  font-size: 0.75rem;
   line-height: 1.5;
   margin: 0;
 `;

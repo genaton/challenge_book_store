@@ -83,19 +83,19 @@ function AdicionarLivro({ onAdd, isAberto, onAbertoChange, onAbrir, pesquisaAber
         ) : (
           // ✅ BOTÃO NORMAL QUANDO PESQUISA ESTÁ FECHADA
           <button 
-            className="btn btn-success d-flex align-items-center gap-2"
+            className="btn btn-success d-flex align-items-center gap-3"
             onClick={handleAbrir}
             style={{
               background: 'linear-gradient(135deg, #28a745 0%, #20c997 100%)',
               border: 'none',
-              borderRadius: '25px',
+              borderRadius: '10px',
               padding: '8px 16px',
               fontWeight: '600',
               whiteSpace: 'nowrap',
-              fontSize: '14px'
+              fontSize: '1rem'
             }}
           >
-            <FaPlus size={14} />
+            <FaPlus size={20} />
             Adicionar
           </button>
         )
@@ -111,9 +111,9 @@ function AdicionarLivro({ onAdd, isAberto, onAbertoChange, onAbrir, pesquisaAber
               border: 'none',
               borderRadius: '20px',
               padding: '8px 0',
-              width: '180px',
+              width: '280px',
               outline: 'none',
-              fontSize: '14px',
+              fontSize: '20px',
             }}
             autoFocus
           />
@@ -121,7 +121,7 @@ function AdicionarLivro({ onAdd, isAberto, onAbertoChange, onAbrir, pesquisaAber
             onClick={handleSubmit}
             className="btn btn-primary btn-sm"
             style={{
-              borderRadius: '15px',
+              borderRadius: '5px',
               padding: '4px 10px',
               fontSize: '12px',
             }}
@@ -144,7 +144,7 @@ function AdicionarLivro({ onAdd, isAberto, onAbertoChange, onAbrir, pesquisaAber
               justifyContent: 'center',
             }}
           >
-            <FaTimes size={10} />
+            <FaTimes size={15} />
           </button>
         </InputContainer>
       )}

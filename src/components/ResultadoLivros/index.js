@@ -25,7 +25,9 @@ const Resultado = styled.div`
 
   p {
     margin-top: 1px;
-    font-size: 0.75em;
+    color: #837cfb;
+    font-size: 0.95em;
+    font-weight: 700;
     text-transform: capitalize;
     text-align: center;
     max-width: 100%;
@@ -41,7 +43,8 @@ const Resultado = styled.div`
 
   &:hover {
     transform: scale(1.05);
-    border: 1px solid red;
+    border: 1px solid #837cfb;
+    border-radius: 15px;
   }
 `;
 
