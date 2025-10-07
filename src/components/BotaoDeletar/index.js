@@ -1,9 +1,14 @@
 import styled from "styled-components";
-import { deleteLivro } from "../../services/livros"; 
+import { deleteLivro } from "../../services/livros";
+import { toast } from "react-toastify";
+import { useState } from "react";
+import ModalConfirmacao from "../ModalConfirmacao"; // ajuste o caminho conforme necessário
+
 const Button = styled.button`
   margin-top: 10px;
-  background-color: #d32f2f;
+  background-color: #f11212ff;
   color: white;
+  font-weight: 600;
   border: none;
   padding: 6px 12px;
   border-radius: 4px;
@@ -17,23 +22,37 @@ const Button = styled.button`
 `;
 
 function BotaoDeletar({ livroId, onDelete }) {
-  const handleClick = async () => {
-    const confirmacao = window.confirm(
-      "Tem certeza que deseja excluir este livro?\nEssa ação não poderá ser desfeita."
-    );
-    if (!confirmacao) return;
+  const [mostrarModal, setMostrarModal] = useState(false);
 
+  const handleClick = () => {
+    setMostrarModal(true);
+  };
+
+  const confirmarExclusao = async () => {
+    setMostrarModal(false);
     const sucesso = await deleteLivro(livroId);
     if (sucesso) {
       onDelete(livroId);
+      toast.success("❌  Livro exclído com sucesso!");
     } else {
       alert("Erro ao excluir o livro.");
     }
   };
 
-  return <Button onClick={handleClick}>Excluir livro</Button>;
+  const cancelarExclusao = () => {
+    setMostrarModal(false);
+  };
+
+  return (
+    <>
+      <Button onClick={handleClick}>Excluir livro</Button>
+      <ModalConfirmacao
+        show={mostrarModal}
+        onConfirm={confirmarExclusao}
+        onCancel={cancelarExclusao}
+      />
+    </>
+  );
 }
 
 export default BotaoDeletar;
-
-

@@ -1,20 +1,14 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { updateLivro } from "../../services/livros"; // ajuste o caminho
+import { updateLivro } from "../../services/livros";
+import ModalEditarTitulo from "../ModalEditarTitulo"; 
+import { toast } from "react-toastify";
 
 const Wrapper = styled.div`
   margin-top: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  input {
-    margin-top: 6px;
-    padding: 4px 8px;
-    font-size: 0.8em;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-  }
 
   button {
     margin-top: 6px;
@@ -33,17 +27,18 @@ const Wrapper = styled.div`
 `;
 
 function BotaoAlterarLivro({ livroId, onUpdate }) {
-  const [editando, setEditando] = useState(false);
-  const [novoTitulo, setNovoTitulo] = useState("");
+  const [mostrarModal, setMostrarModal] = useState(false);
 
-  const handleSubmit = async () => {
-    if (!novoTitulo.trim()) return;
+  const handleAbrirModal = () => setMostrarModal(true);
+  const handleFecharModal = () => setMostrarModal(false);
 
+  const handleConfirmar = async (novoTitulo) => {
     const sucesso = await updateLivro(livroId, novoTitulo);
     if (sucesso) {
       onUpdate(livroId, novoTitulo);
-      setEditando(false);
-      setNovoTitulo("");
+      handleFecharModal();
+      toast.success("✅ Livro atualizado com sucesso!");
+      
     } else {
       alert("Erro ao atualizar o título.");
     }
@@ -51,22 +46,14 @@ function BotaoAlterarLivro({ livroId, onUpdate }) {
 
   return (
     <Wrapper>
-      {!editando ? (
-        <button onClick={() => setEditando(true)}>Alterar título</button>
-      ) : (
-        <>
-          <input
-            type="text"
-            value={novoTitulo}
-            onChange={(e) => setNovoTitulo(e.target.value)}
-            placeholder="Novo título"
-          />
-          <button onClick={handleSubmit}>Salvar</button>
-        </>
-      )}
+      <button onClick={handleAbrirModal}>Alterar título</button>
+      <ModalEditarTitulo
+        show={mostrarModal}
+        onClose={handleFecharModal}
+        onConfirm={handleConfirmar}
+      />
     </Wrapper>
   );
 }
-
 
 export default BotaoAlterarLivro;

@@ -18,6 +18,7 @@ const Resultado = styled.div`
   justify-content: center;
   align-items: center;
   margin-bottom: 20px;
+  color: #837cfb;
   padding: 1em;
   width: auto;
   cursor: pointer;
@@ -25,7 +26,7 @@ const Resultado = styled.div`
 
   p {
     margin-top: 1px;
-    color: #837cfb;
+    
     font-size: 0.95em;
     font-weight: 700;
     text-transform: capitalize;
@@ -45,6 +46,9 @@ const Resultado = styled.div`
     transform: scale(1.05);
     border: 1px solid #837cfb;
     border-radius: 15px;
+    background: linear-gradient(135deg, #79a5d1ff   0%, #837cfb 100%);
+    color: #fff ;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
   }
 `;
 
