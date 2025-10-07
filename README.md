@@ -1,70 +1,78 @@
-# Getting Started with Create React App
+README — Challenge Book Store
+Sistema completo para gerenciamento de livros, com uma interface moderna e intuitiva no frontend, e uma API robusta no backend. O projeto foi desenvolvido com foco em componentização, escalabilidade e boas práticas de desenvolvimento.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Frontend
+Repositório: https://github.com/genaton/challenge_book_store
 
-## Available Scripts
+Tecnologias Utilizadas:
+•	React — Biblioteca JavaScript para construção de interfaces de usuário.
+•	Bootstrap — Framework CSS para design responsivo e componentes visuais.
+•	JavaScript — Linguagem principal de programação.
+•	HTML5 — Estruturação da interface.
+•	CSS — Estilização adicional.
 
-In the project directory, you can run:
+Como Executar o Frontend:
+1.	Clone o repositório: git clone https://github.com/genaton/challenge_book_store.git
+2.	Acesse o diretório do projeto: cd challenge_book_store
+3.	Instale as dependências: npm install
+4.	Inicie o servidor de desenvolvimento: npm start
+5.	Acesse no navegador: http://localhost:3000
 
-### `npm start`
+Backend
+Repositório: https://github.com/genaton/challenge_book_server
+Tecnologias Utilizadas:
+•	Node.js — Ambiente de execução JavaScript no servidor.
+•	Express — Framework para criação de APIs REST.
+•	MySQL — Banco de dados relacional.
+•	MySQL Workbench — Ferramenta de modelagem e administração do banco.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Como Executar o Backend:
+6.	Clone o repositório: git clone https://github.com/genaton/challenge_book_server.git
+7.	Acesse o diretório do projeto: cd challenge_book_server
+8.	Instale as dependências: npm install
+9.	Configure o banco de dados no arquivo .env
+10.	Inicie o servidor: npm run dev
+11.	Servidor rodando em: http://localhost:3001
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Banco de Dados
+Modelo relacional com MySQL. Scripts de criação disponíveis no repositório do backend. Gerenciado via MySQL Workbench.
 
-### `npm test`
+Guia de Instalação das Tecnologias
+Node.js + npm:
+12.	Acesse https://nodejs.org e baixe a versão LTS.
+13.	Execute o instalador e siga os passos padrão.
+14.	Verifique a instalação com os comandos: node -v e npm -v.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+React:
+15.	Com Node.js instalado, execute: npx create-react-app meu-app
+16.	Acesse o diretório: cd meu-app
+17.	Inicie o projeto: npm start
 
-### `npm run build`
+Bootstrap:
+18.	Instale com: npm install bootstrap
+19.	Importe no index.js: import 'bootstrap/dist/css/bootstrap.min.css';
+20.	Para componentes JS: import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+MySQL + MySQL Workbench:
+21.	Acesse https://dev.mysql.com/downloads/installer/
+22.	Baixe o MySQL Installer (Community Edition).
+23.	Escolha Developer Default ou Custom.
+24.	Instale MySQL Server e MySQL Workbench.
+25.	Configure a senha do usuário root e finalize a instalação.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+JavaScript + HTML:
+•	Não é necessário instalar separadamente.
+•	Crie arquivos .html e .js em qualquer editor de texto.
+•	Recomendado usar o Visual Studio Code.
+•	Para testar, salve o arquivo .html e abra no navegador.
+•	Adicione scripts com <script src="script.js"></script> ou diretamente no HTML.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Equipe
+•	Genaton Alex Goncalves — genaton@bb.com.br
+•	Carla Aparecida Dutra Naves de Souza Teixeira — cadnst@gmail.com
+•	Elton Fabiano Uramoto — eltonuramoto@bb.com.br
+•	Renan Paschoalotti — renan.paschoalotti@bb.com.br
+•	Moises Salgado de Morais — moisessalgado@bb.com.br
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Licença
+Este projeto está sob a licença MIT.
