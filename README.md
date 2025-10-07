@@ -1,130 +1,237 @@
 
-# Challenge Book Store
+# 📚 Challenge Book Store
 
-Sistema completo para gerenciamento de livros, com uma interface moderna e intuitiva no frontend, e uma API robusta no backend. O projeto foi desenvolvido com foco em componentização, escalabilidade e boas práticas de desenvolvimento.
+Sistema completo para gerenciamento de livros, com uma interface moderna e intuitiva no frontend e uma API robusta no backend. Desenvolvido com foco em componentização, escalabilidade e boas práticas de desenvolvimento.
 
 ---
 
-## 🖥️ Frontend
+## 🎯 Funcionalidades
 
-### Repositório
+### Frontend
 
-[challenge_book_store](https://github.com/genaton/challenge_book_store)
+* ✅ Interface responsiva e moderna
+* ✅ Listagem de livros com busca e filtros
+* ✅ Cadastro, edição e exclusão de livros
+* ✅ Design com Bootstrap
+* ✅ Componentes reutilizáveis e bem estruturados
 
-### Tecnologias Utilizadas
+### Backend
 
-- **React** — Biblioteca JavaScript para construção de interfaces de usuário.
-- **Bootstrap** — Framework CSS para design responsivo e componentes visuais.
-- **JavaScript** — Linguagem principal de programação.
-- **HTML5** — Estruturação da interface.
-- **CSS** — Estilização adicional.
+* ✅ API RESTful completa
+* ✅ CRUD de livros
+* ✅ Validação de dados
+* ✅ Tratamento de erros
+* ✅ Conexão com MySQL
 
-### Estrutura do Projeto
+### Banco de Dados
 
-- `src/components/` — Componentes reutilizáveis da interface.
-- `src/pages/` — Páginas organizadas por funcionalidades.
-- `src/assets/` — Imagens, ícones e estilos.
-- Comunicação com o backend via API REST.
+* ✅ Modelo relacional otimizado
+* ✅ Tabelas para gerenciamento de livros
+* ✅ Consultas eficientes
 
-### Como Executar o Frontend
+---
 
+## 🖥️ Estrutura do Projeto
 
-git clone https://github.com/genaton/challenge_book_store.git
-cd challenge_book_store
-npm install
-npm start
+### Frontend (`challenge_book_store`)
 
-Acesse em: http://localhost:3000
+```
+📦 src
+ ┣ 📂 components          # Componentes reutilizáveis
+ ┃ ┣ 📄 Header.js
+ ┃ ┣ 📄 Footer.js
+ ┃ ┣ 📄 LivroCard.js
+ ┃ ┣ 📄 LivroForm.js
+ ┃ ┗ 📄 LivroList.js
+ ┣ 📂 pages               # Páginas da aplicação
+ ┃ ┣ 📄 Home.js
+ ┃ ┣ 📄 BookList.js
+ ┃ ┣ 📄 AddBook.js
+ ┃ ┗ 📄 EditBook.js
+ ┣ 📂 services            # Serviços de API
+ ┃ ┗ 📄 api.js
+ ┣ 📂 assets              # Imagens, ícones e estilos
+ ┃ ┣ 📂 images
+ ┃ ┗ 📂 styles
+ ┣ 📂 utils               # Utilitários e helpers
+ ┣ 📄 App.js              # Componente principal
+ ┗ 📄 index.js            # Ponto de entrada do React
+```
 
-🔧 Backend
-Repositório
-challenge_book_server
-Tecnologias Utilizadas
+### Backend (`challenge_book_server`)
 
-Node.js — Ambiente de execução JavaScript no servidor.
-Express — Framework para criação de APIs REST.
-MySQL — Banco de dados relacional.
-MySQL Workbench — Ferramenta de modelagem e administração do banco.
+```
+📦 challenge_book_server
+ ┣ 📂 routes            # Rotas da API
+ ┃ ┗ 📄 livrosRoutes.js
+ ┣ 📂 controllers       # Lógica de negócios
+ ┃ ┗ 📄 livrosController.js
+ ┣ 📂 models            # Modelos de dados
+ ┃ ┗ 📄 livro.js
+ ┣ 📂 config            # Configurações
+ ┃ ┗ 📄 db.js
+ ┣ 📂 middleware        # Middlewares
+ ┃ ┗ 📄 errorHandler.js
+ ┣ 📄 app.js            # Aplicação principal
+ ┗ 📄 livros.json       # Dados de exemplo
+```
 
-Estrutura do Projeto
+---
 
-src/routes/ — Rotas da API.
-src/controllers/ — Lógica de negócios.
-src/models/ — Modelos de dados.
-src/config/ — Configurações de conexão e ambiente.
+## 🗄️ Banco de Dados
 
-Como Executar o Backend
+**Banco de dados:** MySQL
 
+### Criação do banco e usuário
+
+```sql
+CREATE DATABASE IF NOT EXISTS book_store;
+CREATE USER 'book_user'@'localhost' IDENTIFIED BY 'sua_senha_segura';
+GRANT ALL PRIVILEGES ON book_store.* TO 'book_user'@'localhost';
+FLUSH PRIVILEGES;
+```
+
+### Tabela `books`
+
+```sql
+USE book_store;
+
+CREATE TABLE IF NOT EXISTS books (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    author VARCHAR(255) NOT NULL,
+    isbn VARCHAR(20) UNIQUE,
+    publisher VARCHAR(255),
+    publication_year INT,
+    genre VARCHAR(100),
+    price DECIMAL(10, 2),
+    description TEXT,
+    cover_image VARCHAR(500),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+INSERT INTO books (title, author, isbn, publisher, publication_year, genre, price, description)
+VALUES
+('Dom Casmurro', 'Machado de Assis', '9788535932872', 'Companhia das Letras', 2019, 'Romance', 29.90, 'Clássico da literatura brasileira'),
+('O Cortiço', 'Aluísio Azevedo', '9788572329872', 'Penguin Classics', 2018, 'Romance', 34.90, 'Romance naturalista brasileiro');
+```
+
+### Variáveis de ambiente
+
+```env
+DB_HOST=localhost
+DB_USER=book_user
+DB_PASSWORD=sua_senha_segura
+DB_NAME=book_store
+DB_PORT=3306
+PORT=3001
+REACT_APP_API_URL=http://localhost:3001/api
+```
+
+---
+
+## 🚀 Como Rodar a Aplicação
+
+### 1️⃣ Backend
+
+```bash
 git clone https://github.com/genaton/challenge_book_server.git
 cd challenge_book_server
 npm install
-# Configure o banco de dados no arquivo .env
-npm run dev
+cp .env.example .env
+# Configure o .env com as variáveis do banco
+npm run dev    # modo desenvolvimento
+# ou
+npm start      # modo produção
+```
 
-Servidor rodando em: http://localhost:3001
+API disponível em: [http://localhost:3001](http://localhost:3001)
 
-🗄️ Banco de Dados
+### 2️⃣ Frontend
 
-Modelo relacional com MySQL.
-Scripts de criação disponíveis no repositório do backend.
-Gerenciado via MySQL Workbench.
-
-
-🧰 Guia de Instalação das Tecnologias
-Node.js + npm
-
-Acesse nodejs.org e baixe a versão LTS.
-Execute o instalador e siga os passos padrão.
-Verifique a instalação
-
-
-node -v
-npm -v
-
-React
-
-npx create-react-app meu-app
-cd meu-app
+```bash
+git clone https://github.com/genaton/challenge_book_store.git
+cd challenge_book_store
+npm install
+cp .env.example .env
+# Ajuste REACT_APP_API_URL=http://localhost:3001/api
 npm start
+```
 
-Bootstrap
+Frontend disponível em: [http://localhost:3000](http://localhost:3000)
 
-pm install bootstrap
+### 3️⃣ Testes
 
-No index.js:
+* Frontend: `npm test`
+* Backend: `npm test`
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+---
 
-MySQL + MySQL Workbench
+## 🔗 Endpoints da API
 
-Acesse MySQL Installer
-Baixe o instalador (Community Edition).
-Escolha Developer Default ou Custom.
-Instale MySQL Server e MySQL Workbench.
-Configure a senha do usuário root e finalize a instalação.
+| Método | Endpoint       | Descrição                 |
+| ------ | -------------- | ------------------------- |
+| GET    | /api/books     | Lista todos os livros     |
+| GET    | /api/books/:id | Obtém um livro específico |
+| POST   | /api/books     | Cria um novo livro        |
+| PUT    | /api/books/:id | Atualiza um livro         |
+| DELETE | /api/books/:id | Remove um livro           |
 
-JavaScript + HTML
+---
 
-Crie arquivos .html e .js em qualquer editor de texto (recomendado: VS Code).
-Para testar, salve o .html e abra no navegador.
-Adicione scripts com:
+## 📦 Dependências Principais
 
-script.js</script>
+**Frontend**
 
+```json
+{
+  "react": "^18.2.0",
+  "react-dom": "^18.2.0",
+  "react-scripts": "5.0.1",
+  "bootstrap": "^5.3.0",
+  "axios": "^1.4.0",
+  "react-router-dom": "^6.14.0"
+}
+```
 
+**Backend**
 
-👨‍👩‍👧‍👦 Equipe
+```json
+{
+  "express": "^4.18.2",
+  "mysql2": "^3.6.0",
+  "cors": "^2.8.5",
+  "dotenv": "^16.3.1",
+  "helmet": "^7.0.0"
+}
+```
 
-Genaton Alex Goncalves — genaton@bb.com.br
-Carla Aparecida Dutra Naves de Souza Teixeira — cadnst@gmail.com
-Elton Fabiano Uramoto — eltonuramoto@bb.com.br
-Renan Paschoalotti — renan.paschoalotti@bb.com.br
-Moises Salgado de Morais — moisessalgado@bb.com.br
+---
 
-📄 Licença
-Este projeto está sob a licença MIT.
+## 👨‍👩‍👧‍👦 Equipe
 
+* Genaton Alex Goncalves — [genaton@bb.com.br](mailto:genaton@bb.com.br)
+* Carla Aparecida Dutra Naves de Souza Teixeira — [cadnst@gmail.com](mailto:cadnst@gmail.com)
+* Elton Fabiano Uramoto — [eltonuramoto@bb.com.br](mailto:eltonuramoto@bb.com.br)
+* Renan Paschoalotti — [renan.paschoalotti@bb.com.br](mailto:renan.paschoalotti@bb.com.br)
+* Moises Salgado de Morais — [moisessalgado@bb.com.br](mailto:moisessalgado@bb.com.br)
+
+---
+
+## 🤝 Contribuição
+
+1. Faça o fork do projeto
+2. Crie uma branch (`git checkout -b feature/AmazingFeature`)
+3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. Push para a branch (`git push origin feature/AmazingFeature`)
+5. Abra um Pull Request
+
+---
+
+## 📄 Licença
+
+MIT — veja o arquivo LICENSE para mais detalhes.
 
 
 
