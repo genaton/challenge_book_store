@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import ReactDOM from "react-dom/client";
 import Home from "./routes/Home";
 import MinhaEstante from "./routes/MinhaEstante";
@@ -50,7 +50,7 @@ function App() {
     fetchLivros();
   }, []);
 
-  const handleSearch = (textoDigitado) => {
+  const handleSearch = useCallback((textoDigitado) => {
     const textoFormatado = String(textoDigitado || "").toLowerCase();
     const resultado = livros.filter((livro) =>
       String(livro?.titulo || "")
@@ -58,7 +58,7 @@ function App() {
         .includes(textoFormatado)
     );
     setLivrosFiltrados(resultado);
-  };
+  },[livros]);
 
   const mostrarPesquisa = location.pathname === "/minha-estante";
 

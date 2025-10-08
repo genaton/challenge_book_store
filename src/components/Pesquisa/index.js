@@ -7,15 +7,22 @@ function Pesquisa({ onSearch, isAberta, onAbertaChange, onAbrir }) {
 
   // Sincroniza com o estado externo
   useEffect(() => {
-    if (isAberta) {
-      setTimeout(() => {
-        inputRef.current?.focus();
-      }, 100);
-    } else {
-      setValor("");
-      onSearch("");
-    }
-  }, [isAberta, onSearch]);
+  if (isAberta) {
+    setTimeout(() => {
+      inputRef.current?.focus();
+    }, 100);
+  } else {
+    setValor((valorAtual) => {
+      if (valorAtual !== "") {
+        onSearch("");
+      }
+      return "";
+    });
+  }
+  // Remova onSearch das dependências para evitar recriação
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, [isAberta]);
+
 
   const handleAbrir = (e) => {
     e.preventDefault(); // ✅ IMPEDE O RECARREGAMENTO DA PÁGINA
