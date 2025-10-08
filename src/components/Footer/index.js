@@ -127,7 +127,7 @@ const SocialIcon = styled.a`
   }
 `;
 
-const Copyright = styled.p`
+const Copyright = styled.div`
   color: #95a5a6;
   font-size: 0.85rem;
   margin-top: 20px;
