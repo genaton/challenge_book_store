@@ -82,29 +82,19 @@ function App() {
 
   const mostrarAdicionar = location.pathname === "/minha-estante";
 
-  const handleAddLivro = async (titulo) => {
-    if (typeof titulo !== "string") {
-      console.warn("handleAddLivro recebeu título corrompido:", titulo);
-      return;
-    }
+const handleAddLivro = async (titulo) => {
+  if (typeof titulo !== "string") {
+    console.warn("handleAddLivro recebeu título corrompido:", titulo);
+    return;
+  }
 
-    const novoLivro = await postLivro(titulo);
-    if (novoLivro) {
-      const livrosAtualizados = await getLivros();
-      setLivros(livrosAtualizados);
-
-      // Reaplica o filtro atual
-      const textoAtual = String(
-        document.querySelector("input")?.value || ""
-      ).toLowerCase();
-      const resultado = livrosAtualizados.filter((livro) =>
-        String(livro?.titulo || "")
-          .toLowerCase()
-          .includes(textoAtual)
-      );
-      setLivrosFiltrados(resultado);
-    }
-  };
+  const novoLivro = await postLivro(titulo);
+  if (novoLivro) {
+    const livrosAtualizados = await getLivros();
+    setLivros(livrosAtualizados);
+    setLivrosFiltrados(livrosAtualizados);
+  }
+};
 
   return (
     <>

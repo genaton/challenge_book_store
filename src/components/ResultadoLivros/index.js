@@ -21,7 +21,7 @@ const Resultado = styled.div`
   padding: 1em;
   width: auto;
   cursor: pointer;
-  transition: transform 0.2s;
+  transition: all 0.3s ease;
 
   p {
     margin-top: 1px;
@@ -33,18 +33,46 @@ const Resultado = styled.div`
     max-width: 100%;
     word-wrap: break-word;
     white-space: normal;
+    transition: color 0.3s ease;
   }
 
   img {
-    width: 250px;
-    height: auto;
+    width: 180px;        /* LARGURA FIXA */
+    height: 250px;       /* ALTURA FIXA */
+    object-fit: cover;   /* MANTÉM PROPORÇÃO E PREENCHE O ESPAÇO */
     border-radius: 4px;
+    transition: transform 0.3s ease;
   }
 
   &:hover {
     transform: scale(1.05);
     border: 1px solid #837cfb;
     border-radius: 15px;
+    background-color: #f0ebff;
+    
+    p {
+      color: #6a5acd;
+    }
+    
+    img {
+      transform: scale(0.95);
+    }
+  }
+
+  /* DESATIVA O HOVER QUANDO O MODAL ESTIVER ABERTO */
+  &.modal-aberto:hover {
+    transform: none;
+    border: none;
+    border-radius: 0;
+    background-color: transparent;
+    
+    p {
+      color: #837cfb;
+    }
+    
+    img {
+      transform: none;
+    }
   }
 `;
 
@@ -58,11 +86,23 @@ function ResultadosLivros({ livros, onDelete, onUpdate }) {
   return (
     <ResultadoContainer>
       {livrosOrdenados.map((livro) => (
-        <Resultado key={livro.id}>
+        <Resultado key={livro.id} data-livro-id={livro.id}>
           <p>{livro.titulo}</p>
           <img src={livro.imagem} alt={`Capa de ${livro.titulo}`} />
-          <BotaoDeletar livroId={livro.id} onDelete={onDelete} />
-          <BotaoAlterarLivro livroId={livro.id} onUpdate={onUpdate} />
+          
+          {/* CONTAINER PARA OS BOTÕES LADO A LADO */}
+          <div style={{ 
+            display: 'flex', 
+            gap: '8px', 
+            justifyContent: 'center',
+            alignItems: 'flex-end',
+            marginTop: '10px',
+            width: '100%',
+            height: '60px'
+          }}>
+            <BotaoDeletar livroId={livro.id} onDelete={onDelete} />
+            <BotaoAlterarLivro livroId={livro.id} onUpdate={onUpdate} />
+          </div>
         </Resultado>
       ))}
     </ResultadoContainer>
