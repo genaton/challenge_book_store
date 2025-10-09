@@ -1,7 +1,6 @@
 
 import BemVindos from "../components/BemVindos";
 import Card from "../components/Card";
-import { useState } from "react";
 import styled from "styled-components";
 
 const AppContainer = styled.div`
@@ -10,8 +9,6 @@ const AppContainer = styled.div`
 `;
 
 function Home() {
-  
-
   return (
     <AppContainer>
       <BemVindos />

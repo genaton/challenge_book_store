@@ -1,11 +1,6 @@
 import { useState, useEffect } from "react";
 import { getLivros } from "../services/livros";
-import Footer from "../components/Footer";
-import Pesquisa from "../components/Pesquisa";
-import Header from "../components/Header";
 import ResultadosLivros from "../components/ResultadoLivros";
-
-
 import styled from "styled-components";
 
 const AppContainer = styled.div`
@@ -13,22 +8,21 @@ const AppContainer = styled.div`
   height: 100vh;
 `;
 
-function MinhaEstante({ onUpdate, onDelete }) {
-  const [livros, setLivros] = useState([]);
+function MinhaEstante({livros, onUpdate, onDelete }) {
+  const [livrosEstante, setLivrosEstante] = useState(livros);
   useEffect(() => {
     async function fetchLivros() {
       const livrosDaAPI = await getLivros();
-      setLivros(livrosDaAPI);
+      setLivrosEstante(livrosDaAPI);
     }
     fetchLivros();
   }, [])
 
   return (
     <>
-      <ResultadosLivros livros={livros} 
+      <ResultadosLivros livros={livros}
       onUpdate={onUpdate}
-      onDelete={onDelete}/>
-      
+      onDelete={onDelete}/>      
     </>
   );
 }
