@@ -13,9 +13,9 @@ import {
   FaMapMarkerAlt,
   FaPhone,
   FaCreditCard,
-  FaBookmark,        // ✅ Marca-página (Bookmark)
-  FaGraduationCap,   // ✅ Capelo de formatura (Clube)
-  FaAward            // ✅ Selo/prêmio (Qualidade)
+  FaBookmark,        
+  FaGraduationCap,   
+  FaAward            
 } from 'react-icons/fa';
 
 const FooterContainer = styled.footer`

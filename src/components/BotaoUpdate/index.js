@@ -1,17 +1,46 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { updateLivro } from "../../services/livros";
-import ModalEditarTitulo from "../ModalEditarTitulo"; 
-import { toast } from "react-toastify";
+import { FaEdit } from "react-icons/fa";
 
-const Wrapper = styled.div`
-  margin-top: 10px;
+const Button = styled.button`
+  background-color: #1976d2;
+  color: white;
+  border: none;
+  padding: 8px;
+  border-radius: 4px;
+  font-size: 0.8em;
+  cursor: pointer;
+  transition: all 0.2s;
+  opacity: 0.5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+
+  &:hover {
+    background-color: #1565c0;
+    opacity: 1;
+  }
+`;
+
+const EditContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 6px;
+
+  input {
+    padding: 4px 8px;
+    font-size: 0.8em;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    width: 100%;
+    max-width: 200px;
+  }
 
   button {
-    margin-top: 6px;
     background-color: #1976d2;
     color: white;
     border: none;
@@ -27,32 +56,40 @@ const Wrapper = styled.div`
 `;
 
 function BotaoAlterarLivro({ livroId, onUpdate }) {
-  const [mostrarModal, setMostrarModal] = useState(false);
+  const [editando, setEditando] = useState(false);
+  const [novoTitulo, setNovoTitulo] = useState("");
 
-  const handleAbrirModal = () => setMostrarModal(true);
-  const handleFecharModal = () => setMostrarModal(false);
+  const handleSubmit = async () => {
+    if (!novoTitulo.trim()) return;
 
-  const handleConfirmar = async (novoTitulo) => {
     const sucesso = await updateLivro(livroId, novoTitulo);
     if (sucesso) {
       onUpdate(livroId, novoTitulo);
-      handleFecharModal();
-      toast.success("✅ Livro atualizado com sucesso!");
-      
+      setEditando(false);
+      setNovoTitulo("");
     } else {
       alert("Erro ao atualizar o título.");
     }
   };
 
   return (
-    <Wrapper>
-      <button onClick={handleAbrirModal}>Alterar título</button>
-      <ModalEditarTitulo
-        show={mostrarModal}
-        onClose={handleFecharModal}
-        onConfirm={handleConfirmar}
-      />
-    </Wrapper>
+    <>
+      {!editando ? (
+        <Button onClick={() => setEditando(true)}>
+          <FaEdit size={14} />
+        </Button>
+      ) : (
+        <EditContainer>
+          <input
+            type="text"
+            value={novoTitulo}
+            onChange={(e) => setNovoTitulo(e.target.value)}
+            placeholder="Novo título"
+          />
+          <button onClick={handleSubmit}>Salvar</button>
+        </EditContainer>
+      )}
+    </>
   );
 }
 

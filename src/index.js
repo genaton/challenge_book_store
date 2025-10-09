@@ -83,7 +83,6 @@ function App() {
   const mostrarAdicionar = location.pathname === "/minha-estante";
 
   const handleAddLivro = async (titulo) => {
-    console.log("Aqui, titulo: ", titulo.data.livro.titulo);
     if (typeof titulo.data.livro.titulo !== "string") {
       console.warn("handleAddLivro recebeu título corrompido:", titulo.data.livro.titulo);
       return;

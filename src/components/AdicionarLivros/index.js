@@ -49,11 +49,7 @@ function AdicionarLivro({ onAdd, isAberto, onAbertoChange, onAbrir, pesquisaAber
     } catch (error) {
       console.log(error.status);
       console.error("Erro ao adicionar livro: " + error.response.data.erro);
-      if(error.status === 404) {
-        toast.error("❌ Erro ao encontrar ao capa do livro.");
-      } else{
-        toast.error("Erro ao adicionar livro. " + error.response.data.erro);
-      }
+      toast.error("Erro ao adicionar livro. " + error.response.data.erro);
     }
   };
 
