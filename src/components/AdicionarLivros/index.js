@@ -20,6 +20,71 @@ const InputContainer = styled.div`
   border: 1px solid #ddd;
 `;
 
+const BotaoPrincipal = styled.button`
+  background: linear-gradient(135deg, #837cfb 0%, #6a5acd 100%);
+  border: none;
+  border-radius: ${props => props.compacto ? '50%' : '10px'};
+  padding: ${props => props.compacto ? '0' : '8px 16px'};
+  font-weight: 600;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: ${props => props.compacto ? '0' : '12px'};
+  width: ${props => props.compacto ? '45px' : 'auto'};
+  height: ${props => props.compacto ? '45px' : 'auto'};
+  white-space: nowrap;
+  font-size: ${props => props.compacto ? 'inherit' : '1rem'};
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(131, 124, 251, 0.3);
+
+  &:hover {
+    background: linear-gradient(135deg, #6a5acd 0%, #5a4cbf 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(131, 124, 251, 0.4);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 10px rgba(131, 124, 251, 0.3);
+  }
+`;
+
+const BotaoConfirmar = styled.button`
+  background: linear-gradient(135deg, #837cfb 0%, #6a5acd 100%);
+  border: none;
+  border-radius: 5px;
+  padding: 4px 10px;
+  font-size: 12px;
+  color: white;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: linear-gradient(135deg, #6a5acd 0%, #5a4cbf 100%);
+    transform: scale(1.05);
+  }
+`;
+
+const BotaoCancelar = styled.button`
+  background: transparent;
+  border: 1px solid #837cfb;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #837cfb;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #837cfb;
+    color: white;
+    transform: scale(1.1);
+  }
+`;
+
 function AdicionarLivro({ onAdd, isAberto, onAbertoChange, onAbrir, pesquisaAberta }) {
   const [titulo, setTitulo] = useState("");
 
@@ -64,41 +129,16 @@ function AdicionarLivro({ onAdd, isAberto, onAbertoChange, onAbrir, pesquisaAber
   return (
     <Container>
       {!isAberto ? (
-        // ✅ BOTÃO COMPACTO QUANDO PESQUISA ESTÁ ABERTA
+        // ✅ BOTÃO COM HOVER
         pesquisaAberta ? (
-          <button 
-            className="btn btn-success d-flex align-items-center justify-content-center"
-            onClick={handleAbrir}
-            style={{
-              background: 'linear-gradient(135deg, #28a745 0%, #20c997 100%)',
-              border: 'none',
-              borderRadius: '50%',
-              width: '45px',
-              height: '45px',
-              padding: '0',
-              fontWeight: '600'
-            }}
-          >
+          <BotaoPrincipal compacto onClick={handleAbrir}>
             <FaPlus size={16} />
-          </button>
+          </BotaoPrincipal>
         ) : (
-          // ✅ BOTÃO NORMAL QUANDO PESQUISA ESTÁ FECHADA
-          <button 
-            className="btn btn-success d-flex align-items-center gap-3"
-            onClick={handleAbrir}
-            style={{
-              background: 'linear-gradient(135deg, #28a745 0%, #20c997 100%)',
-              border: 'none',
-              borderRadius: '10px',
-              padding: '8px 16px',
-              fontWeight: '600',
-              whiteSpace: 'nowrap',
-              fontSize: '1rem'
-            }}
-          >
+          <BotaoPrincipal onClick={handleAbrir}>
             <FaPlus size={20} />
             Adicionar
-          </button>
+          </BotaoPrincipal>
         )
       ) : (
         <InputContainer>
@@ -118,35 +158,15 @@ function AdicionarLivro({ onAdd, isAberto, onAbertoChange, onAbrir, pesquisaAber
             }}
             autoFocus
           />
-          <button 
-            onClick={handleSubmit}
-            className="btn btn-primary btn-sm"
-            style={{
-              borderRadius: '5px',
-              padding: '4px 10px',
-              fontSize: '12px',
-            }}
-          >
+          <BotaoConfirmar onClick={handleSubmit}>
             ✓
-          </button>
-          <button 
-            onClick={() => {
-              onAbertoChange(false);
-              setTitulo("");
-            }}
-            className="btn btn-outline-secondary btn-sm"
-            style={{
-              borderRadius: '50%',
-              width: '25px',
-              height: '25px',
-              padding: '0',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
+          </BotaoConfirmar>
+          <BotaoCancelar onClick={() => {
+            onAbertoChange(false);
+            setTitulo("");
+          }}>
             <FaTimes size={15} />
-          </button>
+          </BotaoCancelar>
         </InputContainer>
       )}
     </Container>

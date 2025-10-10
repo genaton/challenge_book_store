@@ -8,7 +8,7 @@ import ReactDOM from 'react-dom';
 
 const Button = styled.button`
   margin-top: 10px;
-  background-color: #f11212ff;
+  background-color: #e48383ff;
   color: white;
   font-weight: 600;
   border: none;
@@ -25,7 +25,7 @@ const Button = styled.button`
   height: 32px;
 
   &:hover {
-    background-color: #b71c1c;
+    background-color: #d12c2cdc;
     opacity: 1;
   }
 `;

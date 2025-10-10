@@ -26,7 +26,6 @@ const Resultado = styled.div`
 
   p {
     margin-top: 1px;
-    
     font-size: 0.95em;
     font-weight: 700;
     text-transform: capitalize;
@@ -38,28 +37,26 @@ const Resultado = styled.div`
   }
 
   img {
-    width: 180px;        /* LARGURA FIXA */
-    height: 250px;       /* ALTURA FIXA */
-    object-fit: cover;   /* MANTÉM PROPORÇÃO E PREENCHE O ESPAÇO */
+    width: 180px;
+    height: 250px;
+    object-fit: cover;
     border-radius: 4px;
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
   }
 
   &:hover {
     transform: scale(1.05);
     border: 1px solid #837cfb;
     border-radius: 15px;
-    background: linear-gradient(135deg, #79a5d1ff   0%, #837cfb 100%);
-    color: #fff ;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-    background-color: #f0ebff;
+    background: rgba(131, 124, 251, 0.1);
     
     p {
       color: #6a5acd;
     }
     
+    /* Efeito suave na imagem sem conflito */
     img {
-      transform: scale(0.95);
+      filter: brightness(1.1);
     }
   }
 
@@ -75,7 +72,7 @@ const Resultado = styled.div`
     }
     
     img {
-      transform: none;
+      filter: none;
     }
   }
 `;
