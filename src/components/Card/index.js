@@ -44,7 +44,7 @@ const ConteudoCard = styled.div`
 
 const TituloChamada = styled.h5`
   color: #837cfb;
-  font-size: 1rem;
+  font-size: 34px;
   margin-bottom: 12px;
   font-weight: bold;
   line-height: 1.3;
@@ -52,7 +52,7 @@ const TituloChamada = styled.h5`
 
 const DescricaoChamada = styled.p`
   color: #666;
-  font-size: 0.75rem;
+  font-size: 24px;
   line-height: 1.5;
   margin: 0;
 `;
