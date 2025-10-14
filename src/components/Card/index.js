@@ -1,19 +1,18 @@
 import styled from "styled-components";
 
 const CardContainer = styled.div`
+  width: 300px;
+  height: 580px;
+  flex-shrink: 0;
   background: white;
   border-radius: 15px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
   transition: all 0.3s ease;
-  width: 100%;
-  max-width: auto;
-  height: 580px;
+  display: flex;
   flex-direction: column;
-  margin: 0 auto;
+`;
 
- 
-`
 
 const ImagemContainer = styled.div`
   width: 100%;
