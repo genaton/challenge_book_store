@@ -1,9 +1,6 @@
-// import "./App.css";
-import UltimosLancamentos from "../components/BemVindos";
-import Card from "../components/Card";
-import Footer from "../components/Footer";
-// import 'bootstrap/dist/css/bootstrap.min.css';
-
+import { useState, useEffect } from "react";
+import { getLivros } from "../services/livros";
+import ResultadosLivros from "../components/ResultadoLivros";
 import styled from "styled-components";
 
 const AppContainer = styled.div`
@@ -11,13 +8,22 @@ const AppContainer = styled.div`
   height: 100vh;
 `;
 
-function MinhaEstante() {
+function MinhaEstante({livros, onUpdate, onDelete }) {
+  const [livrosEstante, setLivrosEstante] = useState(livros);
+  useEffect(() => {
+    async function fetchLivros() {
+      const livrosDaAPI = await getLivros();
+      setLivrosEstante(livrosDaAPI);
+    }
+    fetchLivros();
+  }, [])
+
   return (
-    <AppContainer>
-      
-      
-      <Footer />
-    </AppContainer>
+    <>
+      <ResultadosLivros livros={livros}
+      onUpdate={onUpdate}
+      onDelete={onDelete}/>      
+    </>
   );
 }
 

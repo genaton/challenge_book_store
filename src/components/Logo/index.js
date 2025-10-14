@@ -5,30 +5,32 @@ import styled from "styled-components";
 const LogoContainer = styled.div`
   display: flex;
   align-items: center;
+  height: 100%; /* ✅ Garante que ocupe toda a altura */
 `;
 
 const LogoImg = styled.img`
-  display: flex;
-  align-items: center;
   width: 50px;
-  margin-right: 10px;
+  height: 50px; /* ✅ Altura fixa para controle */
+  object-fit: contain; /* ✅ Mantém proporção */
 `;
 
-const BrandContainer = styled.p`
-  display: flex; 
-  align-items: center;
-  font-size: 30px;
+const BrandContainer = styled.span` /* ✅ Mudei para span */
+  font-size: 2em;
   font-family: "PMingLiu-Extb";
-  /* color: #05023a;s */
   color: #837cfb;
+  line-height: 1; /* ✅ Remove espaçamento extra */
+  display: flex;
+  align-items: center;
+  padding-left: 0.5em;
 `;
 
 function Logo() {
   return (
     <LogoContainer>
-      <LogoImg src={logo} alt="logo challenge book store"></LogoImg>
+      <LogoImg src={logo} alt="logo challenge book store" />
       <BrandContainer>BOOKMARK</BrandContainer>
     </LogoContainer>
   );
 }
+
 export default Logo;

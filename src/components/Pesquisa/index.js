@@ -1,86 +1,107 @@
-import Input from "../Input/index.js";
-import styled from "styled-components";
-import { useState } from "react";
-import { getLivros } from "../../services/livros.js";
-import { useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
+import { FaSearch } from 'react-icons/fa';
 
-const PesquisaContainer = styled.section`
-  background-image: linear-gradient(90deg, #002f52 35%, #326589 165%);
-  color: #fff;
-  text-align: center;
-  padding: 85px 0;
-  height: 470px;
-  width: 100%;
-`;
+function Pesquisa({ onSearch, isAberta, onAbertaChange, onAbrir }) {
+  const [valor, setValor] = useState("");
+  const inputRef = useRef(null);
 
-const Titulo = styled.h2`
-  color: #fff;
-  font-size: 36px;
-  text-align: center;
-  width: 100%;
-`;
-
-const Subtitulo = styled.h3`
-  font-size: 16px;
-  font-weight: 500;
-  margin-bottom: 40px;
-`;
-
-const Resultado = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 20px;
-  cursor: pointer;
-
-  p {
-    width: 200px;
-  }
-
-  img {
-    width: 100px;
-  }
-
-  &:hover {
-    border: 1px solid white;
-  }
-`;
-
-function Pesquisa() {
-  const [livrosPesquisados, setLivrosPesquisados] = useState([]);
-  const [livros, setLivros] = useState([]);
-
+  // Sincroniza com o estado externo
   useEffect(() => {
-    fetchLivros();
-  }, []);
-
-  async function fetchLivros() {
-    const livrosDaAPI = await getLivros();
-    setLivros(livrosDaAPI);
+  if (isAberta) {
+    setTimeout(() => {
+      inputRef.current?.focus();
+    }, 100);
+  } else {
+    setValor((valorAtual) => {
+      if (valorAtual !== "") {
+        onSearch("");
+      }
+      return "";
+    });
   }
+  // Remova onSearch das dependências para evitar recriação
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, [isAberta]);
+
+
+  const handleAbrir = (e) => {
+    e.preventDefault(); // ✅ IMPEDE O RECARREGAMENTO DA PÁGINA
+    e.stopPropagation();
+    onAbrir(); // Notifica o Header para fechar o adicionar
+    onAbertaChange(true);
+  };
+
+  const handleBlur = (e) => {
+    if (valor === "" && (!e.relatedTarget || !e.relatedTarget.closest('.pesquisa-container'))) {
+      onAbertaChange(false);
+    }
+    onSearch(valor);
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Escape') {
+      onAbertaChange(false);
+      setValor("");
+      onSearch("");
+    }
+  };
 
   return (
-    <PesquisaContainer>
-      <Titulo>Já sabe por onde começar?</Titulo>
-      <Subtitulo>Encontre seu livro em nossa estante.</Subtitulo>
-      <Input
-        placeholder="Escreva sua próxima leitura"
-        onBlur={(evento) => {
-          const textoDigitado = evento.target.value;
-          const resultadoPesquisa = livros.filter((livro) =>
-            livro.titulo.includes(textoDigitado.toLowerCase())
-          );
-          console.log('teste: ' + resultadoPesquisa)
-          setLivrosPesquisados(resultadoPesquisa);
-        }}
-      />
-      {livrosPesquisados.map((livro) => (
-        <Resultado key={livro.id}>
-          <img src={livro.imagem} alt={`Capa de ${livro.titulo}`} />
-          <p>{livro.titulo}</p>
-        </Resultado>
-      ))}
-    </PesquisaContainer>
+    <div className="d-flex align-items-center pesquisa-container">
+      
+      <div className="position-relative">
+        
+        {/* Container do input */}
+        <div
+          className="bg-white border rounded-pill d-flex align-items-center"
+          style={{
+            width: isAberta ? '250px' : '45px',
+            height: '45px',
+            transition: 'all 0.3s ease',
+            overflow: 'hidden',
+            border: '2px solid #dee2e6 !important',
+            cursor: isAberta ? 'auto' : 'pointer'
+          }}
+          onClick={!isAberta ? handleAbrir : undefined}
+        >
+          {/* Ícone - COM PREVENT DEFAULT */}
+          <FaSearch 
+            className="text-muted mx-3"
+            size={16}
+            style={{ 
+              flexShrink: 0,
+              cursor: 'pointer'
+            }}
+            onClick={handleAbrir} // ✅ Já tem preventDefault
+          />
+          
+          {/* Input */}
+          <input
+            ref={inputRef}
+            type="text"
+            value={valor}
+            onChange={(e) => {
+              setValor(e.target.value);
+              onSearch(e.target.value);
+            }}
+            onBlur={handleBlur}
+            onKeyDown={handleKeyPress}
+            placeholder="Pesquisar livros..."
+            className="border-0 outline-0 w-100"
+            style={{
+              background: 'transparent',
+              outline: 'none',
+              fontSize: '14px',
+              opacity: isAberta ? 1 : 0,
+              transition: 'opacity 0.2s ease 0.1s',
+              marginRight: '15px'
+            }}
+          />
+        </div>
+
+      </div>
+
+    </div>
   );
 }
 

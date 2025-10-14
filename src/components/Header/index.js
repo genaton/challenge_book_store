@@ -1,33 +1,90 @@
-import "./style.css";
 import Logo from "../Logo";
 import OpcoesHeader from "../OpcoesHeader";
-import IconesHeader from "../IconesHeader";
-// import Pesquisa from "../Pesquisa";
 import styled from "styled-components";
-// import "bootstrap/dist/css/bootstrap.min.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import Pesquisa from "../Pesquisa";
+import AdicionarLivro from "../AdicionarLivros";
+import { useState } from "react";
+import { Container, Row, Col } from "react-bootstrap";
 
-// const HeaderContainer = styled.header.attrs(() => ({
-//   className: "d-flex justify-content-center align-items-center pt-3 bg-white",
-// }))
+function Header({ onSearch, onAddLivro }) {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [adicionarAberto, setAdicionarAberto] = useState(false);
+  const [pesquisaAberta, setPesquisaAberta] = useState(false);
 
-const HeaderContainer = styled.header`
-  background-color: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+  const mostrarPesquisa = location.pathname === "/minha-estante";
+  const mostrarAdicionar = location.pathname === "/minha-estante";
 
-function Header() {
+  const handleLogoClick = (e) => {
+    e.preventDefault();
+    navigate("/", { replace: true });
+    setTimeout(() => {
+      window.location.href = "/";
+    }, 100);
+  };
+
+  const handleAbrirPesquisa = () => {
+    if (adicionarAberto) {
+      setAdicionarAberto(false);
+    }
+    setPesquisaAberta(true);
+  };
+
+  const handleAbrirAdicionar = () => {
+    if (pesquisaAberta) {
+      setPesquisaAberta(false);
+    }
+    setAdicionarAberto(true);
+  };
+
   return (
-    <HeaderContainer>
-      <Link to="/">
-        <Logo />
-      </Link>
-      <OpcoesHeader />
-      {/* <IconesHeader /> */}
-      {/* <Pesquisa/> */}
-    </HeaderContainer>
+    <header className="bg-white shadow-sm py-3 position-relative z-3">
+      <Container>
+        <Row className="align-items-center justify-content-center position-relative">
+          {/* UMA ÚNICA COLUNA - Tudo centralizado */}
+          <Col className="d-flex align-items-center justify-content-center gap-4">
+            {/* Logo */}
+            <div
+              onClick={handleLogoClick}
+              className="d-flex align-items-center"
+              style={{ cursor: "pointer", textDecoration: "none" }}
+            >
+              <Logo />
+            </div>
+
+            {/* Botão Minha Estante */}
+            <div className="d-flex align-items-center">
+              <OpcoesHeader />
+            </div>
+
+            {/* Pesquisa e Adicionar (quando aplicável) */}
+            {mostrarPesquisa && onSearch && (
+              <div className="d-flex align-items-center">
+                <Pesquisa
+                  onSearch={onSearch}
+                  isAberta={pesquisaAberta}
+                  onAbertaChange={setPesquisaAberta}
+                  onAbrir={handleAbrirPesquisa}
+                />
+              </div>
+            )}
+            
+            {mostrarAdicionar && onAddLivro && (
+              <div className="d-flex align-items-center">
+                <AdicionarLivro
+                  onAdd={onAddLivro}
+                  isAberto={adicionarAberto}
+                  onAbertoChange={setAdicionarAberto}
+                  onAbrir={handleAbrirAdicionar}
+                  pesquisaAberta={pesquisaAberta}
+                />
+              </div>
+            )}
+          </Col>
+        </Row>
+      </Container>
+    </header>
   );
 }
 
