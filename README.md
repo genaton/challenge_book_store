@@ -91,30 +91,19 @@ GRANT ALL PRIVILEGES ON book_store.* TO 'book_user'@'localhost';
 FLUSH PRIVILEGES;
 ```
 
-### Tabela `books`
+### Tabela `livros`
 
 ```sql
-USE book_store;
+create schema bookmark;
+USE bookmark;
+CREATE TABLE `livros` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `titulo` varchar(255) NOT NULL,
+  `imagem` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
 
-CREATE TABLE IF NOT EXISTS books (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,
-    author VARCHAR(255) NOT NULL,
-    isbn VARCHAR(20) UNIQUE,
-    publisher VARCHAR(255),
-    publication_year INT,
-    genre VARCHAR(100),
-    price DECIMAL(10, 2),
-    description TEXT,
-    cover_image VARCHAR(500),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
 
-INSERT INTO books (title, author, isbn, publisher, publication_year, genre, price, description)
-VALUES
-('Dom Casmurro', 'Machado de Assis', '9788535932872', 'Companhia das Letras', 2019, 'Romance', 29.90, 'Clássico da literatura brasileira'),
-('O Cortiço', 'Aluísio Azevedo', '9788572329872', 'Penguin Classics', 2018, 'Romance', 34.90, 'Romance naturalista brasileiro');
 ```
 
 ### Variáveis de ambiente
