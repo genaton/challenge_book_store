@@ -22,6 +22,7 @@ const BemVindosContainer = styled.section`
   align-items: center;
   width: 100%;
   overflow: hidden;
+  position: relative; /* 🔧 adiciona contexto para qualquer posição absoluta */
 `;
 
 const CarouselWrapper = styled.div`
