@@ -12,7 +12,7 @@ function Home() {
   return (
     <AppContainer>
       <BemVindos />
-      <Card />
+      
      
     </AppContainer>
   );
