@@ -63,11 +63,13 @@ function App() {
   const mostrarPesquisa = location.pathname === "/minha-estante";
 
   const handleUpdate = (id, novoTitulo) => {
-    setLivros((prev) =>
-      prev.map((livro) =>
-        livro.id === id ? { ...livro, titulo: novoTitulo } : livro
-      )
-    );
+    setLivros((prev) => {
+      if(prev){
+        prev.map((livro) =>
+          livro.id === id ? { ...livro, titulo: novoTitulo } : livro
+        )
+      }
+    });
     setLivrosFiltrados((prev) =>
       prev.map((livro) =>
         livro.id === id ? { ...livro, titulo: novoTitulo } : livro
