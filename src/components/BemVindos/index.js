@@ -16,19 +16,19 @@ import fundo12 from '../../img/fundo12.jpg';
 
 const BemVindosContainer = styled.section`
   background-color: #837cfb;
-  padding: 40px 0 80px 0;
+  padding: 24px 0 64px 0;   /* ↓ respiro mais elegante */
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
   overflow: hidden;
-  position: relative; /* 🔧 adiciona contexto para qualquer posição absoluta */
+  position: relative;
 `;
 
 const CarouselWrapper = styled.div`
   width: 100%;
   max-width: 1400px;
-  margin: 30px auto;
+  margin: 16px auto 0;      /* aproxima do título */
 
   .carousel {
     background: transparent !important;
@@ -49,31 +49,26 @@ const CarouselWrapper = styled.div`
 
   .carousel-control-prev,
   .carousel-control-next {
-    width: 50px;
-    height: 50px;
+    width: 44px;            /* ↓ botão um pouco menor */
+    height: 44px;
     background: rgba(255, 255, 255, 0.9);
     border-radius: 50%;
     top: 50%;
     transform: translateY(-50%);
-    opacity: 0.9;
-    border: 2px solid #837cfb;
+    opacity: 0.95;
+    border: 1px solid rgba(255,255,255,0.6); /* borda mais suave */
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     transition: all 0.3s ease;
 
     &:hover {
       opacity: 1;
       background: white;
-      transform: translateY(-50%) scale(1.1);
+      transform: translateY(-50%) scale(1.06);
     }
   }
 
-  .carousel-control-prev {
-    left: -25px;
-  }
-
-  .carousel-control-next {
-    right: -25px;
-  }
+  .carousel-control-prev { left: -25px; }
+  .carousel-control-next { right: -25px; }
 
   .carousel-control-prev-icon,
   .carousel-control-next-icon {
@@ -88,7 +83,7 @@ const CarouselWrapper = styled.div`
   }
 
   .carousel-indicators {
-    margin-bottom: -40px;
+    margin-bottom: -28px;   /* ↑ não “encosta” tanto na borda */
 
     button {
       width: 10px;
@@ -96,9 +91,11 @@ const CarouselWrapper = styled.div`
       border-radius: 50%;
       border: 2px solid white;
       background: transparent;
+      transition: transform .15s ease;
 
       &.active {
         background: white;
+        transform: scale(1.1);
       }
     }
   }
@@ -108,7 +105,7 @@ const SlideRow = styled.div`
   display: flex;
   flex-wrap: nowrap;
   justify-content: center;
-  gap: 20px;
+  gap: 16px;                /* ↓ cards mais coesos */
   padding: 10px;
   overflow-x: hidden;
 `;
@@ -170,11 +167,11 @@ function BemVindos() {
             ))}
           </div>
 
-          <button className="carousel-control-prev" type="button" data-bs-target="#carouselChamadas" data-bs-slide="prev">
+          <button className="carousel-control-prev" type="button" data-bs-target="#carouselChamadas" data-bs-slide="prev" aria-label="Anterior">
             <span className="carousel-control-prev-icon" aria-hidden="true"></span>
             <span className="visually-hidden">Anterior</span>
           </button>
-          <button className="carousel-control-next" type="button" data-bs-target="#carouselChamadas" data-bs-slide="next">
+          <button className="carousel-control-next" type="button" data-bs-target="#carouselChamadas" data-bs-slide="next" aria-label="Próximo">
             <span className="carousel-control-next-icon" aria-hidden="true"></span>
             <span className="visually-hidden">Próximo</span>
           </button>
