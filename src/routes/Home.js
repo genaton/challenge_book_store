@@ -10,6 +10,8 @@ function Home() {
   return (
     <AppContainer>
       <BemVindos />
+      
+     
     </AppContainer>
   );
 }

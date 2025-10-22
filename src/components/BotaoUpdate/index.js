@@ -2,6 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { updateLivro } from "../../services/livros";
 import { FaEdit, FaTimes } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 const Button = styled.button`
   background-color: #837cfb;
@@ -99,6 +100,7 @@ function BotaoAlterarLivro({ livroId, onUpdate }) {
       onUpdate(livroId, novoTitulo);
       setEditando(false);
       setNovoTitulo("");
+      toast.success("📚 Título do livro atualizado com sucesso!");
     } else {
       alert("Erro ao atualizar o título.");
     }

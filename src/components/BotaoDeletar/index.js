@@ -132,6 +132,7 @@ function BotaoDeletar({ livroId, onDelete }) {
     deleteLivro(livroId).then(sucesso => {
       if (sucesso) {
         onDelete(livroId);
+        toast.success("📚 Livro excluído da estante!");
       }
     });
   };
