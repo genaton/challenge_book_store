@@ -36,44 +36,48 @@ Sistema completo para gerenciamento de livros, com uma interface moderna e intui
 ### Frontend (`challenge_book_store`)
 
 ```
-📦 src
- ┣ 📂 components          # Componentes reutilizáveis
- ┃ ┣ 📄 Header.js
- ┃ ┣ 📄 Footer.js
- ┃ ┣ 📄 LivroCard.js
- ┃ ┣ 📄 LivroForm.js
- ┃ ┗ 📄 LivroList.js
- ┣ 📂 pages               # Páginas da aplicação
- ┃ ┣ 📄 Home.js
- ┃ ┣ 📄 BookList.js
- ┃ ┣ 📄 AddBook.js
- ┃ ┗ 📄 EditBook.js
- ┣ 📂 services            # Serviços de API
- ┃ ┗ 📄 api.js
- ┣ 📂 assets              # Imagens, ícones e estilos
- ┃ ┣ 📂 images
- ┃ ┗ 📂 styles
- ┣ 📂 utils               # Utilitários e helpers
- ┣ 📄 App.js              # Componente principal
- ┗ 📄 index.js            # Ponto de entrada do React
+challenge_book_store
+┣ 📂 src
+┃ ┣ 📂 components
+┃ ┃ ┣ 📂 AdicionarLivros
+┃ ┃ ┣ 📂 BotaoDeletar
+┃ ┃ ┣ 📂 BotaoUpdate
+┃ ┃ ┣ 📂 Card
+┃ ┃ ┣ 📂 Footer
+┃ ┃ ┣ 📂 Header
+┃ ┃ ┣ 📂 ModalConfirmacao
+┃ ┃ ┣ 📂 ModalEditarTitulo
+┃ ┃ ┣ 📂 Pesquisa
+┃ ┃ ┣ 📂 ResultadoLivros
+┃ ┃ ┗ 📂 Titulo
+┃ ┣ 📂 routes
+┃ ┃ ┣ 📄 Home.js
+┃ ┃ ┗ 📄 MinhaEstante.js
+┃ ┣ 📂 services
+┃ ┃ ┗ 📄 livros.js
+┃ ┣ 📄 App.js
+┃ ┣ 📄 index.js
+┃ ┗ 📄 App.css
+┣ 📄 package.json
+          
 ```
 
 ### Backend (`challenge_book_server`)
 
 ```
 📦 challenge_book_server
- ┣ 📂 routes            # Rotas da API
- ┃ ┗ 📄 livrosRoutes.js
- ┣ 📂 controllers       # Lógica de negócios
- ┃ ┗ 📄 livrosController.js
- ┣ 📂 models            # Modelos de dados
- ┃ ┗ 📄 livro.js
- ┣ 📂 config            # Configurações
- ┃ ┗ 📄 db.js
- ┣ 📂 middleware        # Middlewares
- ┃ ┗ 📄 errorHandler.js
- ┣ 📄 app.js            # Aplicação principal
- ┗ 📄 livros.json       # Dados de exemplo
+┣ 📂 controllers
+┃ ┗ 📄 livro.js
+┣ 📂 db
+┃ ┗ 📄 index.js
+┣ 📂 models
+┃ ┗ 📄 Livro.js
+┣ 📂 routes
+┃ ┗ 📄 livro.js
+┣ 📂 services
+┃ ┗ 📄 livroService.js
+┣ 📄 app.js
+┣ 📄 package.json
 ```
 
 ---
@@ -81,15 +85,6 @@ Sistema completo para gerenciamento de livros, com uma interface moderna e intui
 ## 🗄️ Banco de Dados
 
 **Banco de dados:** MySQL
-
-### Criação do banco e usuário
-
-```sql
-CREATE DATABASE IF NOT EXISTS book_store;
-CREATE USER 'book_user'@'localhost' IDENTIFIED BY 'sua_senha_segura';
-GRANT ALL PRIVILEGES ON book_store.* TO 'book_user'@'localhost';
-FLUSH PRIVILEGES;
-```
 
 ### Tabela `livros`
 
@@ -106,20 +101,6 @@ CREATE TABLE `livros` (
 
 ```
 
-### Variáveis de ambiente
-
-```env
-DB_HOST=localhost
-DB_USER=book_user
-DB_PASSWORD=sua_senha_segura
-DB_NAME=book_store
-DB_PORT=3306
-PORT=3001
-REACT_APP_API_URL=http://localhost:3001/api
-```
-
----
-
 ## 🚀 Como Rodar a Aplicação
 
 ### 1️⃣ Backend
@@ -127,46 +108,34 @@ REACT_APP_API_URL=http://localhost:3001/api
 ```bash
 git clone https://github.com/genaton/challenge_book_server.git
 cd challenge_book_server
+git checkout main
 npm install
-cp .env.example .env
-# Configure o .env com as variáveis do banco
-npm run dev    # modo desenvolvimento
-# ou
-npm start      # modo produção
+node app.js
 ```
 
-API disponível em: [http://localhost:3001](http://localhost:3001)
+API disponível em: (http://localhost:8000)
 
 ### 2️⃣ Frontend
 
 ```bash
 git clone https://github.com/genaton/challenge_book_store.git
 cd challenge_book_store
+git checkout main
 npm install
-cp .env.example .env
-# Ajuste REACT_APP_API_URL=http://localhost:3001/api
 npm start
 ```
 
-Frontend disponível em: [http://localhost:3000](http://localhost:3000)
-
-### 3️⃣ Testes
-
-* Frontend: `npm test`
-* Backend: `npm test`
+Frontend disponível em: (http://localhost:3000)
 
 ---
 
-## 🔗 Endpoints da API
-
-| Método | Endpoint       | Descrição                 |
-| ------ | -------------- | ------------------------- |
-| GET    | /api/books     | Lista todos os livros     |
-| GET    | /api/books/:id | Obtém um livro específico |
-| POST   | /api/books     | Cria um novo livro        |
-| PUT    | /api/books/:id | Atualiza um livro         |
-| DELETE | /api/books/:id | Remove um livro           |
-
+🔗 Endpoints da API
+Método    Endpoint      Descrição
+GET      /livros        Lista todos os livros
+GET      /livros/:id    Retorna um livro específico
+POST     /livros        Cadastra um novo livro
+PATCH    /livros/:id    Atualiza um livro existente
+DELETE   /livros/:id    Remove um livro
 ---
 
 ## 📦 Dependências Principais
@@ -175,12 +144,12 @@ Frontend disponível em: [http://localhost:3000](http://localhost:3000)
 
 ```json
 {
-  "react": "^18.2.0",
-  "react-dom": "^18.2.0",
+  "react": "^19.1.1",
+  "react-dom": "^19.1.1",
   "react-scripts": "5.0.1",
-  "bootstrap": "^5.3.0",
-  "axios": "^1.4.0",
-  "react-router-dom": "^6.14.0"
+  "bootstrap": "^5.3.8",
+  "axios": "^1.12.2",
+  "react-router-dom": "^7.9.1"
 }
 ```
 
@@ -188,11 +157,10 @@ Frontend disponível em: [http://localhost:3000](http://localhost:3000)
 
 ```json
 {
-  "express": "^4.18.2",
-  "mysql2": "^3.6.0",
+  "express": "^5.1.0",
+  "mysql2": "^3.14.5",
   "cors": "^2.8.5",
-  "dotenv": "^16.3.1",
-  "helmet": "^7.0.0"
+  
 }
 ```
 
@@ -206,21 +174,6 @@ Frontend disponível em: [http://localhost:3000](http://localhost:3000)
 * Renan Paschoalotti — [renan.paschoalotti@bb.com.br](mailto:renan.paschoalotti@bb.com.br)
 * Moises Salgado de Morais — [moisessalgado@bb.com.br](mailto:moisessalgado@bb.com.br)
 
----
-
-## 🤝 Contribuição
-
-1. Faça o fork do projeto
-2. Crie uma branch (`git checkout -b feature/AmazingFeature`)
-3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
-4. Push para a branch (`git push origin feature/AmazingFeature`)
-5. Abra um Pull Request
-
----
-
-## 📄 Licença
-
-MIT — veja o arquivo LICENSE para mais detalhes.
 
 
 
