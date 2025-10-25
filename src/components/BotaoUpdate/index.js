@@ -2,6 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { updateLivro } from "../../services/livros";
 import { FaEdit, FaTimes } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 const Button = styled.button`
   background-color: #837cfb;
@@ -90,18 +91,23 @@ const BotaoCancelar = styled.button`
 function BotaoAlterarLivro({ livroId, onUpdate }) {
   const [editando, setEditando] = useState(false);
   const [novoTitulo, setNovoTitulo] = useState("");
-
+  
   const handleSubmit = async () => {
     if (!novoTitulo.trim()) return;
 
-    const sucesso = await updateLivro(livroId, novoTitulo);
-    if (sucesso) {
-      onUpdate(livroId, novoTitulo);
-      setEditando(false);
-      setNovoTitulo("");
-    } else {
-      alert("Erro ao atualizar o título.");
-    }
+    try {
+      const sucesso = await updateLivro(livroId, novoTitulo);
+      if (sucesso) {
+        onUpdate(livroId, novoTitulo);
+        setEditando(false);
+        setNovoTitulo("");
+        toast.success("📚 Título do livro atualizado com sucesso!");
+      } else {
+        toast.error("Erro ao atualizar o título.");
+      }
+    } catch (error){
+      toast.error("Erro a atualizar o livro.");
+    }    
   };
 
   const handleCancelar = () => {

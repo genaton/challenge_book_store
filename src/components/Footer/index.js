@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 import { Container, Row, Col } from 'react-bootstrap';
 import { 
@@ -73,13 +74,15 @@ const LogoIcon = styled.div`
   align-items: center;
   transition: all 0.3s ease;
   cursor: pointer;
-  min-width: 120px;
-  
+
+  /* 🔧 largura fixa = centralização perfeita entre os 3 */
+  width: 140px;               /* ajuste se quiser mais largo/estreito */
+  text-align: center;
+
   &:hover {
     transform: scale(1.15);
   }
 `;
-
 const IconContainer = styled.div`
   width: 70px;
   height: 70px;
@@ -99,6 +102,13 @@ const IconText = styled.span`
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
+
+  /* 🔧 garante centralização e altura consistente */
+  display: block;
+  line-height: 1.2;
+  min-height: 2.4em;          /* reserva espaço para até 2 linhas */
+  white-space: normal;        /* permite quebra */
+  word-break: break-word;     /* evita overflow feio */
 `;
 
 const SocialIcons = styled.div`
@@ -145,21 +155,28 @@ const Newsletter = styled.div`
 const NewsletterInput = styled.input`
   width: 100%;
   padding: 12px;
-  border: 1px solid #34495e;
+  border: 1px solid ${props => (props.$error ? "#ff6b6b" : "#34495e")};
   background: #2c3e50;
   color: #ecf0f1;
   border-radius: 5px;
-  margin-bottom: 12px;
+  margin-bottom: 8px; /* menor pra caber feedback logo abaixo */
   font-size: 0.9rem;
-  
+  outline: none;
+
   &::placeholder {
     color: #95a5a6;
   }
   
   &:focus {
-    outline: none;
-    border-color: #837cfb;
+    border-color: ${props => (props.$error ? "#ff6b6b" : "#837cfb")};
+    box-shadow: 0 0 0 3px rgba(131,124,251,0.15);
   }
+`;
+
+const Feedback = styled.div`
+  font-size: 0.8rem;
+  margin-bottom: 12px;
+  color: ${props => (props.$type === "error" ? "#ffb3b3" : "#b8f2c8")};
 `;
 
 const NewsletterButton = styled.button`
@@ -175,10 +192,16 @@ const NewsletterButton = styled.button`
   align-items: center;
   justify-content: center;
   gap: 8px;
-  
+
   &:hover {
     background: #6b63d4;
     transform: translateY(-2px);
+  }
+
+  &:disabled {
+    opacity: 0.65;
+    transform: none;
+    cursor: not-allowed;
   }
 `;
 
@@ -191,6 +214,37 @@ const PaymentIcons = styled.div`
 `;
 
 function Footer() {
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState({ type: "", message: "" }); // type: "error" | "success" | ""
+  const [loading, setLoading] = useState(false);
+
+  const validateEmail = (v) =>
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(v).toLowerCase());
+
+  const handleNewsletter = (e) => {
+    e.preventDefault();
+    setStatus({ type: "", message: "" });
+
+    const trimmed = email.trim();
+
+    if (!trimmed) {
+      setStatus({ type: "error", message: "Informe seu e-mail para assinar." });
+      return;
+    }
+    if (!validateEmail(trimmed)) {
+      setStatus({ type: "error", message: "E-mail inválido. Verifique e tente novamente." });
+      return;
+    }
+
+    // Simulação de envio (sem backend). Se tiver API, faça a chamada aqui.
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      setStatus({ type: "success", message: "Inscrição realizada com sucesso! 🎉" });
+      setEmail("");
+    }, 600);
+  };
+
   return (
     <FooterContainer>
       <Container>
@@ -258,13 +312,29 @@ function Footer() {
               <FooterTitle>
                 <FaEnvelope /> Fique por Dentro
               </FooterTitle>
-              <Newsletter>
+
+              <Newsletter as="form" onSubmit={handleNewsletter}>
                 <p style={{color: '#bdc3c7', fontSize: '0.9rem', marginBottom: '15px'}}>
                   Receba novidades e promoções
                 </p>
-                <NewsletterInput type="email" placeholder="Seu melhor e-mail" />
-                <NewsletterButton>
-                  <FaEnvelope /> Assinar Newsletter
+
+                <NewsletterInput
+                  type="email"
+                  placeholder="Seu melhor e-mail"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  $error={status.type === "error"}
+                />
+
+                {/* Feedback inline, sem quebrar layout */}
+                {status.message && (
+                  <Feedback $type={status.type}>
+                    {status.message}
+                  </Feedback>
+                )}
+
+                <NewsletterButton type="submit" disabled={loading}>
+                  <FaEnvelope /> {loading ? "Enviando..." : "Assinar Newsletter"}
                 </NewsletterButton>
               </Newsletter>
 
@@ -295,7 +365,7 @@ function Footer() {
             <Col xs="auto">
               <LogoIcon>
                 <IconContainer>
-                  <FaBookmark size={30} color="white" /> {/* ✅ Marca-página */}
+                  <FaBookmark size={30} color="white" />
                 </IconContainer>
                 <IconText>Bookmark</IconText>
               </LogoIcon>
@@ -304,7 +374,7 @@ function Footer() {
             <Col xs="auto">
               <LogoIcon>
                 <IconContainer>
-                  <FaGraduationCap size={30} color="white" /> {/* ✅ Capelo */}
+                  <FaGraduationCap size={30} color="white" />
                 </IconContainer>
                 <IconText>Clube de Leitura</IconText>
               </LogoIcon>
@@ -313,7 +383,7 @@ function Footer() {
             <Col xs="auto">
               <LogoIcon>
                 <IconContainer>
-                  <FaAward size={30} color="white" /> {/* ✅ Selo */}
+                  <FaAward size={30} color="white" />
                 </IconContainer>
                 <IconText>Qualidade Garantida</IconText>
               </LogoIcon>
@@ -343,7 +413,7 @@ function Footer() {
           </Copyright>
           
           <Copyright style={{marginTop: '20px', borderTop: '1px solid #34495e', paddingTop: '15px'}}>
-            © 2024 Bookmark Livraria. Todos os direitos reservados.
+            © 2025 Bookmark Livraria. Todos os direitos reservados.
           </Copyright>
         </LogoSection>
       </Container>

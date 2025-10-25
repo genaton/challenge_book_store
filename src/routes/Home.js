@@ -1,6 +1,4 @@
-
 import BemVindos from "../components/BemVindos";
-import Card from "../components/Card";
 import styled from "styled-components";
 
 const AppContainer = styled.div`
@@ -12,7 +10,7 @@ function Home() {
   return (
     <AppContainer>
       <BemVindos />
-      <Card />
+      
      
     </AppContainer>
   );

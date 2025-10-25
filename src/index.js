@@ -62,18 +62,11 @@ function App() {
 
   const mostrarPesquisa = location.pathname === "/minha-estante";
 
-  const handleUpdate = (id, novoTitulo) => {
-    setLivros((prev) =>
-      prev.map((livro) =>
-        livro.id === id ? { ...livro, titulo: novoTitulo } : livro
-      )
-    );
-    setLivrosFiltrados((prev) =>
-      prev.map((livro) =>
-        livro.id === id ? { ...livro, titulo: novoTitulo } : livro
-      )
-    );
-  };
+  const handleUpdate = async () => {
+    const livrosAtualizados = await getLivros();
+    setLivros(livrosAtualizados);
+    setLivrosFiltrados(livrosAtualizados);
+  };   
 
   const handleDelete = (id) => {
     setLivros((prev) => prev.filter((livro) => livro.id !== id));
