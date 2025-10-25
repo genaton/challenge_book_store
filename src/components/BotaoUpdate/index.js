@@ -106,7 +106,7 @@ function BotaoAlterarLivro({ livroId, onUpdate }) {
         toast.error("Erro ao atualizar o título.");
       }
     } catch (error){
-      toast.error("Erro a atualizar o livro.");
+      toast.error("Erro a atualizar o livro. Título não encontrado ou já existe este livro na sua estante.");
     }    
   };
 
